@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_personal"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+
+            android:elevation="6dp"
+            app:cardCornerRadius="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_ava1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_weight="1"
+                android:fontFamily="serif"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:text="Welcome back to Home,"
+                android:textSize="15sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/TvNameClient"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="-15dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:text="Sarah"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/BtnNotifications"
+                    android:layout_width="33dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@color/white"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/notification" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_logOut"
+                    android:layout_width="35dp"
+                    android:layout_height="32dp"
+                    android:background="@color/white"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.722"
+                    app:layout_constraintStart_toEndOf="@+id/BtnNotifications"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.52"
+                    app:srcCompat="@drawable/log_out" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        android:background="@drawable/weatherforcast">
+
+        <LinearLayout
+            android:layout_width="270dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/TvCity"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Ha Noi"
+                android:textSize="30sp"
+                android:paddingLeft="20dp"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/TvNation"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="VietNam"
+                android:textSize="15sp"
+                android:paddingLeft="20dp"
+                >
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:id="@+id/imgforcast"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/rainny"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    >
+
+                </ImageView>
+                <TextView
+                    android:id="@+id/TvWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:text="Rainy"
+                    android:textSize="15sp"
+                    android:paddingLeft="20dp"
+                    android:layout_marginTop="13dp"
+                    >
+                </TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id= "@+id/TvTemperature"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="25°"
+                android:gravity =  "center"
+                android:textSize = "45sp"
+                >
+            </TextView>
+            <TextView
+                android:id= "@+id/TvHumidityAndWind"
+                android:paddingBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="H:2° W:12°"
+                android:gravity =  "center"
+                android:textSize = "15sp"
+                >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        app:tabGravity="fill"
+        app:tabIndicator="@drawable/tab_indicator"
+        app:tabIndicatorColor="#008DDA"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorGravity="stretch"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/white"></com.google.android.material.tabs.TabLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_marginTop="20dp"
+            android:id="@+id/viewPage2"
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+        </androidx.viewpager2.widget.ViewPager2>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fl_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_add"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/tae"
+            android:layout_margin="16dp"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
