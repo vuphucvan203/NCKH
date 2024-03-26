@@ -2,31 +2,26 @@ package com.example.nghiencuukhoahoc.Devices;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.DataSingleton;
 import com.example.nghiencuukhoahoc.R;
-import com.example.nghiencuukhoahoc.TimerDialog;
-import com.example.nghiencuukhoahoc.TimerDialogOnClicked;
+import com.example.nghiencuukhoahoc.Timer.TimerDialog;
+import com.example.nghiencuukhoahoc.Timer.TimerDialogOnClicked;
 
 import java.util.List;
 
@@ -44,7 +39,9 @@ public class GasActivity extends AppCompatActivity {
     CountDownTimer countDownTimer;
     ImageButton btn_timer;
     private TimerDialog myDialog;
-    AnimationDrawable rocketAnimation;
+    private AnimationDrawable rocketAnimation;
+    Drawable currentFrame, checkFrame;
+    private int frameNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +50,11 @@ public class GasActivity extends AppCompatActivity {
         Intent it = getIntent();
         name_room = it.getStringExtra("name");
         if(name_room.equals("kitchen")){
-            tv_nameRoom.setText("Kitchen Room");
+            tv_nameRoom.setText("Kitchen");
         }else if(name_room.equals("living")){
             tv_nameRoom.setText("Living Room");
+        }else if(name_room.equals("garage")) {
+            tv_nameRoom.setText("Garage");
         }else
         {
             tv_nameRoom.setText("Bed Room");
@@ -280,7 +279,7 @@ public class GasActivity extends AppCompatActivity {
 //        imgView.clearAnimation();
 //        iconFan.clearAnimation();
         rocketAnimation.stop();
-        imgView.setBackgroundResource(R.drawable.anh1);
+//        imgView.setBackgroundResource(R.drawable.mobile1);
         aSwitchFan.setChecked(false);
         aSwitchFan.setText("OFF");
     }

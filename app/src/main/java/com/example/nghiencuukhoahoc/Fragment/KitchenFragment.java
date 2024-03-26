@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.nghiencuukhoahoc.Adapter.DeviceAdapter;
 import com.example.nghiencuukhoahoc.Adapter.onItemClickListener;
@@ -74,11 +75,18 @@ public class KitchenFragment extends Fragment implements onItemClickListener {
     @Override
     public void onItemClick(int position, String name, int value) {
         Log.i("intent", "onItemClick: " + position);
-        if (position == 2) {
-            Intent intent = new Intent(getActivity(), GasActivity.class);
-            intent.putExtra("name", name);
-            intent.putExtra("value", value);
-            startActivity(intent);
+        if(value!=-1)
+        {
+            if (position == 2) {
+                Intent intent = new Intent(getActivity(), GasActivity.class);
+                intent.putExtra("name", name);
+                intent.putExtra("value", value);
+                startActivity(intent);
+            }
+        }else
+        {
+            Toast.makeText(getContext(),"Not Available !!!", Toast.LENGTH_LONG).show();
         }
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.nghiencuukhoahoc;
+package com.example.nghiencuukhoahoc.Service;
 
 import android.app.Dialog;
 import android.app.Service;
@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.DataSingleton;
+import com.example.nghiencuukhoahoc.R;
 
 import java.util.List;
 

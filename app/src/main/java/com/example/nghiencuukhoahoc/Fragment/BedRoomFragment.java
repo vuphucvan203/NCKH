@@ -70,15 +70,6 @@ public class BedRoomFragment extends Fragment implements onItemClickListener {
     public void onItemClick(int position, String name, int value) {
         Log.i("intent", "onItemClick: " + position);
         if(value != -1) {
-//            if (position == 3) { // Lamp
-//                Intent intent = new Intent(getActivity(), LampActivity.class);
-//                intent.putExtra("name", name);
-//                startActivity(intent);
-//            } else if (position == 4) { //Fan
-//                Intent intent = new Intent(getActivity(), FanActivity.class);
-//                intent.putExtra("name", name);
-//                startActivity(intent);
-//            }
             if (position == 2) { // Gas
                 Intent intent = new Intent(getActivity(), GasActivity.class);
                 intent.putExtra("name", name);

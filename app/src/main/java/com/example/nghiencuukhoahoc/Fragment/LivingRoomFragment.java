@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -68,17 +69,6 @@ public class LivingRoomFragment extends Fragment implements onItemClickListener 
     @Override
     public void onItemClick(int position, String name, int value) {
         Log.i("intent", "onItemClick: " + position);
-//        if (position == 3) {
-//            Intent intent = new Intent(getActivity(), LampActivity.class);
-//            intent.putExtra("name", name);
-//            intent.putExtra("value", value);
-//            startActivity(intent);
-//        }
-//        else if(position == 4){ //Fan
-//            Intent intent = new Intent(getActivity(), FanActivity.class);
-//            intent.putExtra("name", name);
-//            startActivity(intent);
-//        }
         if(value!=-1)
         {
             if (position == 2) { // Lamp
@@ -86,6 +76,8 @@ public class LivingRoomFragment extends Fragment implements onItemClickListener 
                 intent.putExtra("name", name);
                 startActivity(intent);
             }
+        } else{
+            Toast.makeText(getContext(),"Not Available !!!", Toast.LENGTH_LONG).show();
         }
 
     }

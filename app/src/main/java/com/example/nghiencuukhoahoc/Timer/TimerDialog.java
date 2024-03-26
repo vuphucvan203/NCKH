@@ -1,4 +1,4 @@
-package com.example.nghiencuukhoahoc;
+package com.example.nghiencuukhoahoc.Timer;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+
+import com.example.nghiencuukhoahoc.R;
 
 public class TimerDialog extends Dialog {
     private TimerDialogOnClicked timerDialogOnClicked;

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.R;
+
 import java.util.List;
 
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder> {
@@ -53,6 +54,11 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
             case "kitchen":
                 holder.tvNameRoom.setText("Kitchen");
                 holder.imgRoom.setImageResource(R.drawable.kitchen);
+                holder.tvDevices.setText(currRoom.getNumber_devices() + " Devices");
+                break;
+            case "garage":
+                holder.tvNameRoom.setText("Garage");
+                holder.imgRoom.setImageResource(R.drawable.garage);
                 holder.tvDevices.setText(currRoom.getNumber_devices() + " Devices");
                 break;
 

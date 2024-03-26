@@ -17,5 +17,12 @@
     <color name="Underwater4">#0086ad</color>
     <color name="Underwater5">#005582</color>
     <color name="tae">#008DDA</color>
+    <color name="transparent">#55000000</color>
+    <color name="primaryColor">#357CF6</color>
+    <color name="primaryDarkColor">#12A058</color>
+    <color name="accentColor">#12A058</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="itemTextColor">#707070</color>
+    <color name="transparentColor" >#00FFFFFF</color>
 
 </resources>
