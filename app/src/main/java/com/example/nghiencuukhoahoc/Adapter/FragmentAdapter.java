@@ -12,6 +12,7 @@ import com.example.nghiencuukhoahoc.Fragment.AllRoomFragment;
 import com.example.nghiencuukhoahoc.Fragment.BedRoomFragment;
 import com.example.nghiencuukhoahoc.Fragment.KitchenFragment;
 import com.example.nghiencuukhoahoc.Fragment.LivingRoomFragment;
+import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 
 public class FragmentAdapter extends FragmentStateAdapter {
 //    private ViewPager2 viewPager2;
@@ -21,17 +22,22 @@ public class FragmentAdapter extends FragmentStateAdapter {
 //    public void setViewPager2(ViewPager2 viewPager2){
 //        this.viewPager2 = viewPager2;
 //    }
+    private RoomsViewModel roomsViewModel;
     public FragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+    }
+    public FragmentAdapter(@NonNull FragmentActivity fragmentActivity,RoomsViewModel roomsViewModel) {
+        super(fragmentActivity);
+        this.roomsViewModel = roomsViewModel;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         if (position == 0) {
-            AllRoomFragment allRoom = new AllRoomFragment();
+//            AllRoomFragment allRoom = new AllRoomFragment();
             //allRoom.setData(lst);
-            return allRoom;
+            return new AllRoomFragment(roomsViewModel);
         } else if (position == 1) {
             return new BedRoomFragment();
         } else if (position == 2) {

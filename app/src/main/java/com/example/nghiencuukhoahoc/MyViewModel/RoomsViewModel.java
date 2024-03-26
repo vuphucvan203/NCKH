@@ -11,6 +11,7 @@ import java.util.List;
 public class RoomsViewModel extends ViewModel {
     private MutableLiveData<List<Rooms>> LiveData ;
     private DataSingleton dataSingleton ;
+    List<Rooms> lst;
 
     public RoomsViewModel() {
         LiveData = new MutableLiveData<>();
@@ -22,7 +23,7 @@ public class RoomsViewModel extends ViewModel {
         return LiveData;
     }
     private void initData() {
-        List<Rooms> lst  =new ArrayList<>();
+        lst  =new ArrayList<>();
         lst.add(new Rooms("bedRoom",19,0,1));
         lst.add(new Rooms("livingRoom",40,0,-1));
         lst.add(new Rooms("kitchen",23,0,-1));
@@ -34,6 +35,11 @@ public class RoomsViewModel extends ViewModel {
     public void setData(List<Rooms> m_lst){
         LiveData.setValue(m_lst);
         dataSingleton.setSharedData(m_lst);
+    }
+    public  void addRoom(Rooms rooms)
+    {
+        lst.add(rooms);
+        setData(lst);
     }
 
     @Override

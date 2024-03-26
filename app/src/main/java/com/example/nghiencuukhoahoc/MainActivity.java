@@ -1,6 +1,7 @@
 package com.example.nghiencuukhoahoc;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Dialog;
@@ -8,6 +9,7 @@ import android.media.MediaCodec;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.nghiencuukhoahoc.Adapter.FragmentAdapter;
 import com.example.nghiencuukhoahoc.Model.ProcessJson;
+import com.example.nghiencuukhoahoc.Model.Rooms;
+import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 import com.example.nghiencuukhoahoc.WeatherForcast.DataWeather;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
     DataWeather dataWeather;
-
+    private RoomsViewModel roomsViewModel;
     Vibrator vibrator;
 
     @Override
@@ -50,7 +54,25 @@ public class MainActivity extends AppCompatActivity {
         InitWidgets();
         getWeatherForcast();
         getTabLayOut();
+        roomsViewModel = new ViewModelProvider(this).get(RoomsViewModel.class);
+        initEvent();
+
     }
+    private void initEvent()
+    {
+        addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                add_room();
+            }
+        });
+    }
+
+    private void add_room() {
+        Rooms  a=new Rooms("garage",90,99,-1);
+        roomsViewModel.addRoom(a);
+    }
+
     private void InitWidgets() {
         img_btn_Logout = findViewById(R.id.img_btn_logOut);
         imgWeather = findViewById(R.id.imgforcast);

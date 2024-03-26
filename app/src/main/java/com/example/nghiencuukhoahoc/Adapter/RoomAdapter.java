@@ -2,7 +2,9 @@ package com.example.nghiencuukhoahoc.Adapter;
 
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -64,7 +66,14 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
 
         }
 
-
+        holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                menu.setHeaderTitle("Select Action");
+                menu.add(Menu.NONE, R.id.action_edit, Menu.NONE, "Edit");
+                menu.add(Menu.NONE, R.id.action_delete, Menu.NONE, "Delete");
+            }
+        });
 
         holder.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
