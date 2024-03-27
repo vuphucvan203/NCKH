@@ -41,6 +41,10 @@ public class RoomsViewModel extends ViewModel {
         lst.add(rooms);
         setData(lst);
     }
+    public void removeRoom(Rooms room){
+        lst.remove(room);
+        setData(lst);
+    }
 
     @Override
     protected void onCleared() {
