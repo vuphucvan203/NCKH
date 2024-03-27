@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.media.MediaCodec;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -63,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                add_room();
+                Intent intent = new Intent(MainActivity.this, AddRoomActivity.class);
+                startActivity(intent);
+                //add_room();
             }
         });
     }
