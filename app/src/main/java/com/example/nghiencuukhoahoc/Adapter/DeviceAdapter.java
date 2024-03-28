@@ -90,6 +90,27 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
                 holder.img_status.setImageResource(R.drawable.normal);
                 holder.tv_status.setText("Normal");
             }
+        }else if(position == 3){ // Fan
+            holder.img_devices.setImageResource(R.drawable.fan);
+            if(rooms.getFan_state() == -1){
+                holder.tv_index.setVisibility(View.INVISIBLE);
+                holder.img_status.setImageResource(R.drawable.red_dot);
+                holder.tv_status.setText("Not available !");
+            }
+            else {
+                holder.tv_index.setTextSize(13);
+                holder.tv_index.setVisibility(View.VISIBLE);
+                if(rooms.getFan_state() == 0){
+                    holder.img_devices.clearAnimation();
+                    holder.tv_index.setText("OFF");
+                }
+                else{
+                    holder.img_devices.startAnimation(animationRotate);
+                    holder.tv_index.setText("ON");
+                }
+                holder.img_status.setImageResource(R.drawable.normal);
+                holder.tv_status.setText("Normal");
+            }
         }
     }
     @Override
@@ -97,7 +118,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
         if(rooms == null){
             return 0;
         }
-        return 3;
+        return 4;
     }
 
     public class devicesViewHolder extends RecyclerView.ViewHolder
@@ -122,6 +143,8 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
             Log.i("ChckOnClick", "onClick: "+ rooms.getName());
             if(getAdapterPosition() == 2) {
                 listener.onItemClick(getAdapterPosition(), rooms.getName(), rooms.getGas_state());
+            }if(getAdapterPosition() == 3){
+                listener.onItemClick(getAdapterPosition(), rooms.getName(), rooms.getFan_state());
             }
 
         }

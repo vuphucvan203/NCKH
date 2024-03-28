@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -72,12 +73,13 @@ public class AllRoomFragment extends Fragment  {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         if (item.getItemId() == R.id.action_edit)
         {
             Toast.makeText(getContext(), "Edit", Toast.LENGTH_SHORT).show();
             return  true;
         } else if (item.getItemId() == R.id.action_delete) {
-            Toast.makeText(getContext(), "Edit", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
             return  true;
         } else {
             return super.onContextItemSelected(item);
