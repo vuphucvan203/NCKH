@@ -5,6 +5,16 @@ public class Rooms {
     private float temperature, humadity, gas;
     private int Number_devices;
 
+    public int getFan_state() {
+        return fan_state;
+    }
+
+    public void setFan_state(int fan_state) {
+        this.fan_state = fan_state;
+    }
+
+    private int fan_state;
+
     public int getGas_state() {
         return gas_state;
     }
@@ -14,12 +24,12 @@ public class Rooms {
     }
 
     private int gas_state;
-    public Rooms(String name, float temperature, float humadity, int gas_state) {
+    public Rooms(String name, float temperature, float humadity, int gas_state,int fan_state) {
         this.name = name;
         this.temperature = temperature;
         this.humadity = humadity;
         this.gas_state=gas_state;
-        this.gas = gas;
+        this.fan_state=fan_state;
     }
     public Rooms(){
         this.name = "Not availble";
@@ -32,6 +42,8 @@ public class Rooms {
         }if(humadity != 0){
             count++;
         }if(gas_state != -1){
+            count++;
+        }if(fan_state != -1){
             count++;
         }
         return count;
@@ -57,9 +69,9 @@ public class Rooms {
     public float getHumidity() {
         return humadity;
     }
-    public float getGas() {
-        return gas;
-    }
+//    public float getGas() {
+//        return gas;
+//    }
     public void setHumidity(float humidity) {
         this.humadity = humidity;
     }

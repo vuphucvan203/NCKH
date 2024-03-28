@@ -44,9 +44,9 @@ public class MyWarningService extends Service {
         // Hiển thị dialog khi Service được khởi chạy
         Log.d("testService", "onStartCommand: ");
         lst_rooms = DataSingleton.getInstance().getSharedData();
-        Log.d("testService", "onStartCommand: "+ lst_rooms.get(0).getGas());
+        Log.d("testService", "onStartCommand: "+ lst_rooms.get(0).getGas_state());
         for(int i =0 ; i < lst_rooms.size() ; i++){
-            if(lst_rooms.get(i).getGas() == 0){
+            if(lst_rooms.get(i).getGas_state() == 0){
                 showMyDialog();
             }
         }

@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void add_room() {
-        Rooms  a=new Rooms("garage",90,99,-1);
+        Rooms  a=new Rooms("garage",90,99,-1,-1);
         roomsViewModel.addRoom(a);
     }
 

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nghiencuukhoahoc.Adapter.DeviceAdapter;
 import com.example.nghiencuukhoahoc.Adapter.onItemClickListener;
+import com.example.nghiencuukhoahoc.Devices.FanActivity;
 import com.example.nghiencuukhoahoc.Devices.GasActivity;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
@@ -74,7 +75,11 @@ public class BedRoomFragment extends Fragment implements onItemClickListener {
                 Intent intent = new Intent(getActivity(), GasActivity.class);
                 intent.putExtra("name", name);
                 startActivity(intent);
-        }
+        }else if (position == 3) { //Fan
+                Intent intent = new Intent(getActivity(), FanActivity.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
+            }
         else{
             Toast.makeText(getContext(),"Not Available !!!", Toast.LENGTH_LONG).show();
         }
