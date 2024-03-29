@@ -5,36 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ConnectUser.SignInActivity"
+    tools:context=".ConnectUser.SigninwithPhone"
     android:background="@drawable/up">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:background="#00FFFFFF"
-        android:text= "Sign In"
-        />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="270dp"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:gravity="center_vertical">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello"
+            android:text="Welcome back"
             android:textColor="@color/white"
             android:textSize="25sp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Up!"
+            android:text="Log In!"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="45sp"/>
@@ -45,7 +33,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -53,7 +40,7 @@
             android:layout_marginRight="50dp">
 
             <EditText
-                android:id="@+id/signupEmail"
+                android:id="@+id/signupPhone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -63,38 +50,6 @@
                 android:paddingLeft="20dp"
                 android:textColor="#000000"
                 android:textSize="18sp" />
-            <TextView
-                android:background="#fff"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email Address"
-                android:textColor="@color/black"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textAllCaps="true"
-                android:layout_marginLeft="15dp"
-                android:textSize="12sp"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/signupPass"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="50dp">
-
-            <EditText
-                android:id="@+id/signupPassword"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_edt"
-                android:gravity="center_vertical"
-                android:inputType="text|textPassword"
-                android:paddingLeft="20dp"
-                android:textColor="#000000"
-                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,7 +58,7 @@
                 android:background="#fff"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="Password"
+                android:text="Phone number"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -116,52 +71,113 @@
             android:layout_marginRight="50dp">
 
             <EditText
-                android:id="@+id/signupPasswordC"
+                android:id="@+id/OTP"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_edt"
                 android:gravity="center_vertical"
-                android:inputType="text|textPassword"
+                android:inputType="number|numberPassword|numberDecimal"
                 android:paddingLeft="20dp"
                 android:textColor="#000000"
                 android:textSize="18sp" />
+
             <TextView
-                android:background="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Confirm Password"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
+                android:layout_marginLeft="15dp"
+                android:background="#fff"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:layout_marginLeft="15dp"
-                android:textSize="12sp"/>
+                android:text="OTP"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical">
 
+            <TextView
+                android:id="@+id/tv_resetpass"
+                android:layout_width="97dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+
+                android:text="Forgot password"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_Signup"
             android:layout_width="240dp"
             android:layout_height="45dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/bg_btn"
-            android:text="Sign Up"
+            android:text="Sign in"
             android:textAllCaps="false"
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView2"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginStart="92dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="88dp"
-            android:layout_marginBottom="38dp"
-            android:gravity="center_horizontal"
-            android:text="Already an user? Sign in"
-            android:textColor="#000000" />
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btn_OTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="109dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="104dp"
+                android:background="@drawable/bg_btn"
+                android:text="Get OTP"
+                android:textAllCaps="false"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_signupwithemail"
+                android:layout_width="231dp"
+                android:layout_height="24dp"
+                android:layout_above="@+id/tv_Login"
+                android:layout_below="@+id/btn_OTP"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="88dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="92dp"
+                android:layout_marginBottom="31dp"
+                android:gravity="center|center_horizontal"
+                android:text="Not an user? Sign up with email"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tv_Login"
+                android:layout_width="231dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="14dp"
+                android:gravity="center|center_horizontal"
+                android:text="Sign in with email"
+                android:textColor="#000000"
+                android:visibility="visible" />
+        </RelativeLayout>
 
     </LinearLayout>
 </LinearLayout>

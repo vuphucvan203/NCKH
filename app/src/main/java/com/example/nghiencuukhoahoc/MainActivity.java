@@ -21,12 +21,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.nghiencuukhoahoc.Adapter.FragmentAdapter;
+import com.example.nghiencuukhoahoc.ConnectUser.SignInActivity;
 import com.example.nghiencuukhoahoc.Model.ProcessJson;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 import com.example.nghiencuukhoahoc.WeatherForcast.DataWeather;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DecimalFormat;
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private FragmentAdapter fragmentAdapter;
+    private FirebaseAuth auth;
     Dialog dialog;
 
     String weather;
@@ -67,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddRoomActivity.class);
                 startActivity(intent);
                 //add_room();
+            }
+        });
+        img_btn_Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(intent);
             }
         });
     }

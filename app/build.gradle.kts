@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.nghiencuukhoahoc"
-        minSdk = 30
+        minSdk = 28 //30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -30,6 +30,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -41,6 +44,8 @@ dependencies {
 
     //volley
     implementation("com.android.volley:volley:1.2.1")
+    implementation("androidx.navigation:navigation-fragment:2.7.7")
+    implementation("androidx.navigation:navigation-ui:2.7.7")
 
     coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:1.1.5")
     implementation ("com.amazonaws:aws-android-sdk-pinpoint:2.73.0")
@@ -60,5 +65,5 @@ dependencies {
 
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-auth:22.3.1")
 }

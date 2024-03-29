@@ -38,16 +38,18 @@
         android:layout_height="60dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp">
+
         <EditText
-            android:id="@+id/edt_email"
-            android:layout_marginTop="10dp"
+            android:id="@+id/signupEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:textSize="18sp"
-            android:paddingLeft="20dp"
-            android:inputType="textEmailAddress"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edt"
             android:gravity="center_vertical"
-            android:background="@drawable/bg_edt"/>
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            android:textColor="#000000"
+            android:textSize="18sp" />
         <TextView
             android:background="#fff"
             android:layout_width="wrap_content"
@@ -66,16 +68,18 @@
             android:layout_height="60dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp">
+
             <EditText
-                android:id="@+id/edt_pass"
-                android:layout_marginTop="10dp"
+                android:id="@+id/signupPasswordC"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:textSize="18sp"
-                android:paddingLeft="20dp"
-                android:inputType="numberPassword"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edt"
                 android:gravity="center_vertical"
-                android:background="@drawable/bg_edt"/>
+                android:inputType="text|textPassword"
+                android:paddingLeft="20dp"
+                android:textColor="#000000"
+                android:textSize="18sp" />
             <TextView
                 android:background="#fff"
                 android:layout_width="wrap_content"
@@ -87,14 +91,6 @@
                 android:paddingRight="5dp"
                 android:layout_marginLeft="15dp"
                 android:textSize="12sp"/>
-            <ImageView
-                android:padding="4dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/pass"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="20dp"
-                />
         </RelativeLayout>
         <RelativeLayout
             android:layout_marginLeft="50dp"
@@ -102,32 +98,21 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center_vertical">
-            <Switch
-                android:id="@+id/sw_remember"
-                android:layout_centerVertical="true"
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"/>
+
             <TextView
-                android:layout_centerVertical="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Remember me"
-                android:layout_marginLeft="45dp"
-                android:textColor="@color/black"
-                android:textSize="9sp"/>
-            <TextView
+                android:id="@+id/tv_resetpass"
+                android:layout_width="97dp"
+                android:layout_height="24dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:gravity="center"
+
                 android:text="Forgot password"
                 android:textColor="@color/black"
-
-                android:gravity="center"
-                android:textSize="9sp"/>
+                android:textSize="12sp" />
         </RelativeLayout>
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/button2"
             android:layout_width="240dp"
             android:layout_height="45dp"
             android:textSize="15sp"
@@ -136,26 +121,42 @@
             android:text="Log In"
             android:layout_marginTop="30dp"
             android:background="@drawable/bg_btn"/>
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="20dp"
-                android:layout_marginRight="20dp"
+                android:id="@+id/tv_loginphone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="#2A29E8"
-                android:text="Sign up here"/>
+                android:layout_height="33dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="41dp"
+                android:layout_marginEnd="89dp"
+                android:gravity="center|center_horizontal"
+                android:text="Login with phone number"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_below="@+id/tv_loginphone"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="39dp"
+                android:layout_marginEnd="88dp"
+                android:layout_marginBottom="38dp"
+                android:gravity="center|center_horizontal"
+                android:text="Not an user? Sign up"
+                android:textColor="#000000" />
         </RelativeLayout>
 
     </LinearLayout>
