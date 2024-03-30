@@ -46,15 +46,16 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tot"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="20dp"
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:paddingLeft="10dp"
                 android:paddingTop="3dp"
                 android:text="Welcome back to Home,"
                 android:textSize="15sp"
-                android:textStyle="italic" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TvNameClient"
@@ -64,7 +65,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="10dp"
                 android:paddingTop="3dp"
-                android:text="Sarah"
+                android:text=""
                 android:textSize="20dp"
                 android:textStyle="bold" />
 

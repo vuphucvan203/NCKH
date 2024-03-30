@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,6 +37,7 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity {
     private TextView TvWeather, TvTemperature,
             TvHumidityAndWind;
+    private TextView username,us2;
     private ImageView imgWeather,avartar;
     private ImageButton img_btn_Logout;
     private FloatingActionButton addbtn;
@@ -60,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
         getTabLayOut();
         roomsViewModel = new ViewModelProvider(this).get(RoomsViewModel.class);
         initEvent();
-
+        auth= FirebaseAuth.getInstance();
+        if(auth.getCurrentUser().getEmail()!=null) username.setText(auth.getCurrentUser().getEmail());
+        else if(auth.getCurrentUser().getPhoneNumber()!=null)username.setText(auth.getCurrentUser().getPhoneNumber());
     }
     private void initEvent()
     {
@@ -88,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void InitWidgets() {
+        us2=findViewById(R.id.tot);
+        username=findViewById(R.id.TvNameClient);
         img_btn_Logout = findViewById(R.id.img_btn_logOut);
         imgWeather = findViewById(R.id.imgforcast);
         TvWeather = findViewById(R.id.TvWeather);

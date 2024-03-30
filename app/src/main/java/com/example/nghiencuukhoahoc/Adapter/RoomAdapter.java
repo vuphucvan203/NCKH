@@ -31,6 +31,19 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         this.lstRoom = l;
         notifyDataSetChanged();
     }
+    public Rooms getItem(int position) {
+        return lstRoom.get(position);
+    }
+    private int selectedPosition = -1;
+
+    public void setSelectedPosition(int position) {
+        selectedPosition = position;
+    }
+
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+
     @NonNull
     @Override
     public RoomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,6 +78,14 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
                 break;
 
         }
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setSelectedPosition(holder.getAdapterPosition());
+                notifyDataSetChanged(); // Cập nhật lại adapter để cập nhật giao diện người dùng
+                return false;
+            }
+        });
 
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override

@@ -73,12 +73,13 @@ public class AllRoomFragment extends Fragment  {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = roomAdapter.getSelectedPosition();
         if (item.getItemId() == R.id.action_edit)
         {
             Toast.makeText(getContext(), "Edit", Toast.LENGTH_SHORT).show();
             return  true;
         } else if (item.getItemId() == R.id.action_delete) {
+            roomsViewModel.removeRoom(roomAdapter.getItem(position));
             Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
             return  true;
         } else {
