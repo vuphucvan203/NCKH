@@ -10,46 +10,45 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.nghiencuukhoahoc.Fragment.AllRoomFragment;
 import com.example.nghiencuukhoahoc.Fragment.BedRoomFragment;
+import com.example.nghiencuukhoahoc.Fragment.GarageFragment;
 import com.example.nghiencuukhoahoc.Fragment.KitchenFragment;
 import com.example.nghiencuukhoahoc.Fragment.LivingRoomFragment;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 
 public class FragmentAdapter extends FragmentStateAdapter {
-//    private ViewPager2 viewPager2;
+    //    private ViewPager2 viewPager2;
     public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
-//    public void setViewPager2(ViewPager2 viewPager2){
+
+    //    public void setViewPager2(ViewPager2 viewPager2){
 //        this.viewPager2 = viewPager2;
 //    }
     private RoomsViewModel roomsViewModel;
+
     public FragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
-    public FragmentAdapter(@NonNull FragmentActivity fragmentActivity,RoomsViewModel roomsViewModel) {
+
+    public FragmentAdapter(@NonNull FragmentActivity fragmentActivity, RoomsViewModel roomsViewModel) {
         super(fragmentActivity);
         this.roomsViewModel = roomsViewModel;
     }
 
     @NonNull
     @Override
-    public Fragment createFragment(int position) {
-        if (position == 0) {
-//            AllRoomFragment allRoom = new AllRoomFragment();
-            //allRoom.setData(lst);
-            return new AllRoomFragment(roomsViewModel);
-        } else if (position == 1) {
-            return new BedRoomFragment();
-        } else if (position == 2) {
-            return new LivingRoomFragment();
-        }else {
-            return new KitchenFragment();
-        }
+    public Fragment createFragment(int position)
+    {
+        if (position == 0) return new AllRoomFragment(roomsViewModel);
+        if (position == 1) return new LivingRoomFragment();
+        if (position == 2) return new BedRoomFragment();
+        if (position == 3) return new KitchenFragment();
+        else return new GarageFragment();
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 
 }

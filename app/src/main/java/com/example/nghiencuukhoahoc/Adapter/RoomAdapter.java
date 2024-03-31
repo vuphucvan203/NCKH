@@ -56,13 +56,13 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         if(currRoom == null) return;
 
         switch (currRoom.getName()){
-            case "bedRoom" :
-                holder.tvNameRoom.setText("bedRoom");
+            case "bedroom" :
+                holder.tvNameRoom.setText("Bedroom");
                 holder.imgRoom.setImageResource(R.drawable.bedroom);
                 holder.tvDevices.setText(currRoom.getNumber_devices() + " Devices");
                 break;
             case "livingRoom" :
-                holder.tvNameRoom.setText("LivingRoom");
+                holder.tvNameRoom.setText("Living room");
                 holder.imgRoom.setImageResource(R.drawable.livingroom);
                 holder.tvDevices.setText(currRoom.getNumber_devices() + " Devices");
                 break;

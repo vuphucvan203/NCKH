@@ -66,17 +66,16 @@ public class LivingRoomFragment extends Fragment implements onItemClickListener 
         return view;
     }
 
-
     @Override
     public void onItemClick(int position, String name, int value) {
         Log.i("intent", "onItemClick: " + position);
         if(value!=-1)
         {
-            if (position == 2) { // Lamp
+            if (position == 0) { // Gas
                 Intent intent = new Intent(getActivity(), GasActivity.class);
                 intent.putExtra("name", name);
                 startActivity(intent);
-            }else if (position == 3) { //Fan
+            }else if (position == 1) { //Fan
                 Intent intent = new Intent(getActivity(), FanActivity.class);
                 intent.putExtra("name", name);
                 startActivity(intent);

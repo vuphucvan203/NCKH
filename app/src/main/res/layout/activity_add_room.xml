@@ -25,23 +25,23 @@
             android:layout_height="50dp"
             android:scaleType="centerCrop"
             android:src="@drawable/btn_return" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp">
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="20dp">-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/roomNameAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="Nhập tên phòng"
-                android:inputType="textPersonName"
-                android:textSize="25dp" />
-        </LinearLayout>
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/roomNameAdd"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:ems="10"-->
+<!--                android:gravity="center"-->
+<!--                android:hint="Nhập tên phòng"-->
+<!--                android:inputType="textPersonName"-->
+<!--                android:textSize="25dp" />-->
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,30 +51,103 @@
             android:layout_marginTop="30dp">
 
             <TextView
-                android:id="@+id/widgetTypeAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:text="Loại thiết bị cảnh báo cháy"
+                android:text="Loại phòng"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <Button
+                    android:id="@+id/living_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/tae"
+                    android:text="Phòng khách" />
+
+                <Button
+                    android:id="@+id/bed_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/tae"
+                    android:text="Phòng ngủ" />
+
+                <Button
+                    android:id="@+id/kitchen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/tae"
+                    android:text="Phòng bếp" />
+
+                <Button
+                    android:id="@+id/garage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/tae"
+                    android:text="Gara" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp">
 
-            <Button
-                android:backgroundTint="@color/tae"
-                android:id="@+id/gasDetectionDevice"
-                android:layout_width="120dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phát hiện khí gas" />
-
+                android:layout_weight="1"
+                android:ems="10"
+                android:text="Loại thiết bị "
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <Button
+                    android:backgroundTint="@color/tae"
+                    android:id="@+id/gasDetectionDevice"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Phát hiện khí gas"
+                    android:layout_marginRight="10dp"/>
+                <Button
+                    android:backgroundTint="@color/tae"
+                    android:id="@+id/fan"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Quạt thông gió" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
 
 
         <LinearLayout

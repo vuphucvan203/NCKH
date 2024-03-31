@@ -25,13 +25,13 @@ import com.example.nghiencuukhoahoc.R;
 
 import java.util.List;
 
-public class BedRoomFragment extends Fragment implements onItemClickListener {
+
+public class GarageFragment extends Fragment implements onItemClickListener {
     private RecyclerView rcv_devices;
     private DeviceAdapter adapterDevices;
     private RoomsViewModel roomsViewModel ;
-    public BedRoomFragment() {
+    public GarageFragment() {
         // Required empty public constructor
-
     }
 
     @Override
@@ -51,12 +51,12 @@ public class BedRoomFragment extends Fragment implements onItemClickListener {
 
         rcv_devices.setAdapter(adapterDevices);
         roomsViewModel = new ViewModelProvider(getActivity()).get(RoomsViewModel.class);
-        roomsViewModel.getLst_liveData().observe(getViewLifecycleOwner(),
-                new Observer<List<Rooms>>() {
+        roomsViewModel.getLst_liveData().observe(getViewLifecycleOwner(), new Observer<List<Rooms>>() {
             @Override
             public void onChanged(List<Rooms> rooms) {
+
                 for(int i =0 ; i < rooms.size(); i++){
-                    if(rooms.get(i).getName().equals("bedroom")){
+                    if(rooms.get(i).getName().equals("garage")){
                         adapterDevices.SetData(rooms.get(i));
                         break;
                     }
@@ -65,22 +65,24 @@ public class BedRoomFragment extends Fragment implements onItemClickListener {
         });
         return view;
     }
+
     @Override
     public void onItemClick(int position, String name, int value) {
         Log.i("intent", "onItemClick: " + position);
-        if(value != -1) {
+        if(value!=-1)
+        {
             if (position == 0) { // Gas
                 Intent intent = new Intent(getActivity(), GasActivity.class);
                 intent.putExtra("name", name);
                 startActivity(intent);
             }else if (position == 1) { //Fan
-                    Intent intent = new Intent(getActivity(), FanActivity.class);
-                    intent.putExtra("name", name);
-                    startActivity(intent);
+                Intent intent = new Intent(getActivity(), FanActivity.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
             }
-            else{
-                Toast.makeText(getContext(),"Not Available !!!", Toast.LENGTH_LONG).show();
-            }
+        } else{
+            Toast.makeText(getContext(),"Not Available !!!", Toast.LENGTH_LONG).show();
         }
+
     }
 }

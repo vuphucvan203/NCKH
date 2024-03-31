@@ -1,5 +1,6 @@
 package com.example.nghiencuukhoahoc;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
@@ -7,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.app.Dialog;
 import android.content.Intent;
 import android.media.MediaCodec;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -73,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddRoomActivity.class);
-                startActivity(intent);
-                //add_room();
+                startActivityForResult(intent, 100);
             }
         });
         img_btn_Logout.setOnClickListener(new View.OnClickListener() {
@@ -87,9 +88,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void add_room() {
-        Rooms  a=new Rooms("garage",90,99,-1,-1);
-        roomsViewModel.addRoom(a);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bundle bundle = data.getExtras();
+        String name = bundle.getString("Name");
+        int gas = bundle.getInt("Gas");
+        int fan = bundle.getInt("Fan");
+        Rooms  a = new Rooms(name,gas,fan);
+        Log.e("Name:", name);
+        Log.isLoggable("Gas:", gas);
+        Log.isLoggable("Fan:", fan);
+        if(requestCode == 100 && resultCode == 150)
+        {
+            roomsViewModel.addRoom(a);
+        }
     }
 
     private void InitWidgets() {
@@ -108,9 +121,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void getTabLayOut() {
         tabLayout.addTab(tabLayout.newTab().setText("All Room"));
-        tabLayout.addTab(tabLayout.newTab().setText("Bed Room"));
         tabLayout.addTab(tabLayout.newTab().setText("Living Room"));
+        tabLayout.addTab(tabLayout.newTab().setText("Bedroom"));
         tabLayout.addTab(tabLayout.newTab().setText("Kitchen"));
+        tabLayout.addTab(tabLayout.newTab().setText("Garage"));
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(),getLifecycle());
         viewPager2.setAdapter(fragmentAdapter);
 

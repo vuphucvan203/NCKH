@@ -23,6 +23,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
                 if (firebaseAuth.getCurrentUser() != null) {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
@@ -30,7 +32,6 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(new Intent(SplashActivity.this, SignUpActivity.class));
                     finish();
                 }
-
             }
         }, 3000);
     }

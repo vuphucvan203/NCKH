@@ -43,35 +43,35 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
         //  devices d = list_devices.get(position);
         DecimalFormat df = new DecimalFormat("#.#");
 
-        if(position == 0){ //temperature
-            holder.img_devices.setImageResource(R.drawable.temperature);
-            holder.tv_index.setText(df.format(rooms.getTemperature()) + "°" );
-            if(rooms.getTemperature() == 0){
-                holder.img_status.setImageResource(R.drawable.red_dot);
-                holder.tv_status.setText("Not available");
-            }
-            else if(rooms.getTemperature() >= 40){
-                holder.img_status.setImageResource(R.drawable.warning);
-                holder.tv_status.setText("Warning !!!");
-            }
-            else {
-                holder.img_status.setImageResource(R.drawable.normal);
-                holder.tv_status.setText("Normal");
-            }
-        }
-        else if(position ==1 ) {// humidity
-            holder.img_devices.setImageResource(R.drawable.humidity);
-            holder.tv_index.setText(df.format(rooms.getHumidity()) + "%" );
-            if(rooms.getTemperature() == 0){
-                holder.img_status.setImageResource(R.drawable.red_dot);
-                holder.tv_status.setText("Not available");
-            }
-            else {
-                holder.img_status.setImageResource(R.drawable.normal);
-                holder.tv_status.setText("Normal");
-            }
-        }
-        else if(position == 2){ // gas
+//        if(position == 0){ //temperature
+//            holder.img_devices.setImageResource(R.drawable.temperature);
+//            holder.tv_index.setText(df.format(rooms.getTemperature()) + "°" );
+//            if(rooms.getTemperature() == 0){
+//                holder.img_status.setImageResource(R.drawable.red_dot);
+//                holder.tv_status.setText("Not available");
+//            }
+//            else if(rooms.getTemperature() >= 40){
+//                holder.img_status.setImageResource(R.drawable.warning);
+//                holder.tv_status.setText("Warning !!!");
+//            }
+//            else {
+//                holder.img_status.setImageResource(R.drawable.normal);
+//                holder.tv_status.setText("Normal");
+//            }
+//        }
+//        else if(position ==1 ) {// humidity
+//            holder.img_devices.setImageResource(R.drawable.humidity);
+//            holder.tv_index.setText(df.format(rooms.getHumidity()) + "%" );
+//            if(rooms.getTemperature() == 0){
+//                holder.img_status.setImageResource(R.drawable.red_dot);
+//                holder.tv_status.setText("Not available");
+//            }
+//            else {
+//                holder.img_status.setImageResource(R.drawable.normal);
+//                holder.tv_status.setText("Normal");
+//            }
+//        }
+        if(position == 0){ // gas
             holder.img_devices.setImageResource(R.drawable.gasdetector);
             if(rooms.getGas_state() == -1){
                 holder.tv_index.setVisibility(View.INVISIBLE);
@@ -90,7 +90,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
                 holder.img_status.setImageResource(R.drawable.normal);
                 holder.tv_status.setText("Normal");
             }
-        }else if(position == 3){ // Fan
+        }else if(position == 1){ // Fan
             holder.img_devices.setImageResource(R.drawable.fan);
             if(rooms.getFan_state() == -1){
                 holder.tv_index.setVisibility(View.INVISIBLE);
@@ -118,7 +118,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
         if(rooms == null){
             return 0;
         }
-        return 4;
+        return 2;
     }
 
     public class devicesViewHolder extends RecyclerView.ViewHolder
@@ -139,11 +139,11 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
 
         @Override
         public void onClick(View view) {
-            Log.i("ChckOnClick", "onClick: "+ getAdapterPosition());
-            Log.i("ChckOnClick", "onClick: "+ rooms.getName());
-            if(getAdapterPosition() == 2) {
+            Log.i("CheckOnClick", "onClick: "+ getAdapterPosition());
+            Log.i("CheckOnClick", "onClick: "+ rooms.getName());
+            if(getAdapterPosition() == 0) {
                 listener.onItemClick(getAdapterPosition(), rooms.getName(), rooms.getGas_state());
-            }if(getAdapterPosition() == 3){
+            }if(getAdapterPosition() == 1){
                 listener.onItemClick(getAdapterPosition(), rooms.getName(), rooms.getFan_state());
             }
 

@@ -85,7 +85,5 @@ public class AllRoomFragment extends Fragment  {
         } else {
             return super.onContextItemSelected(item);
         }
-
     }
-
 }

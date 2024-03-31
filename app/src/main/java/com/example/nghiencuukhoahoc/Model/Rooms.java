@@ -24,10 +24,8 @@ public class Rooms {
     }
 
     private int gas_state;
-    public Rooms(String name, float temperature, float humadity, int gas_state,int fan_state) {
+    public Rooms(String name, int gas_state,int fan_state) {
         this.name = name;
-        this.temperature = temperature;
-        this.humadity = humadity;
         this.gas_state=gas_state;
         this.fan_state=fan_state;
     }
