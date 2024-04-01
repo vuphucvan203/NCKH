@@ -1,5 +1,7 @@
 package com.example.nghiencuukhoahoc.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -21,11 +23,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nghiencuukhoahoc.Adapter.RoomAdapter;
+import com.example.nghiencuukhoahoc.MainActivity;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 import com.example.nghiencuukhoahoc.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
@@ -97,10 +102,23 @@ public class AllRoomFragment extends Fragment  {
         }
     }
     private void deleteFromFirebase(Rooms rooms) {
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-        FirebaseDatabase.getInstance().getReference("Users")
-                .child(firebaseUser.getUid()).child("room").child(rooms.getName())
-                .removeValue();
+        new AlertDialog.Builder(getActivity().getApplicationContext()).setTitle(getString(R.string.app_name))
+                .setMessage("Do you want to delete this item?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mAuth = FirebaseAuth.getInstance();
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        FirebaseDatabase.getInstance().getReference("Users")
+                                .child(firebaseUser.getUid()).child("room").child(rooms.getName())
+                                .removeValue(new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                        Toast.makeText(getActivity().getApplicationContext(), "delete data success",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                }).setNegativeButton("CANCEL",null).show();
+
     }
 }
