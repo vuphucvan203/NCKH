@@ -1,14 +1,19 @@
 package com.example.nghiencuukhoahoc;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.media.MediaCodec;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -29,14 +34,21 @@ import com.example.nghiencuukhoahoc.ConnectUser.SignInActivity;
 import com.example.nghiencuukhoahoc.Model.ProcessJson;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
+import com.example.nghiencuukhoahoc.Service.MyFirebaseMessagingService;
 import com.example.nghiencuukhoahoc.WeatherForcast.DataWeather;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String CHANEL_ID ="push_notification_id" ;
+    private static final String TAG= MainActivity.class.getName();
     private TextView TvWeather, TvTemperature,
             TvHumidityAndWind;
     private TextView username,us2;
@@ -49,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     Dialog dialog;
 
-    String weather;
+    String weather,temper;
 
     RequestQueue requestQueue;
     DataWeather dataWeather;
@@ -63,12 +75,26 @@ public class MainActivity extends AppCompatActivity {
         InitWidgets();
         getWeatherForcast();
         getTabLayOut();
+//        createWeatherNotification();
         roomsViewModel = new ViewModelProvider(this).get(RoomsViewModel.class);
         initEvent();
         auth= FirebaseAuth.getInstance();
         if(auth.getCurrentUser().getEmail()!=null) username.setText(auth.getCurrentUser().getEmail());
         else if(auth.getCurrentUser().getPhoneNumber()!=null)username.setText(auth.getCurrentUser().getPhoneNumber());
+
     }
+
+    private void createWeatherNotification() {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel chanel= new NotificationChannel(CHANEL_ID,"Weather Notification"
+                    , NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager=getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(chanel);
+            Toast.makeText(this,"WNOtii",Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void initEvent()
     {
         addbtn.setOnClickListener(new View.OnClickListener() {
@@ -120,11 +146,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void getTabLayOut() {
-        tabLayout.addTab(tabLayout.newTab().setText("All Room"));
-        tabLayout.addTab(tabLayout.newTab().setText("Living Room"));
-        tabLayout.addTab(tabLayout.newTab().setText("Bedroom"));
-        tabLayout.addTab(tabLayout.newTab().setText("Kitchen"));
-        tabLayout.addTab(tabLayout.newTab().setText("Garage"));
+//        tabLayout.addTab(tabLayout.newTab().setText("All Room"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Living Room"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Bedroom"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Kitchen"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Garage"));
+        roomsViewModel = new ViewModelProvider(this).get(RoomsViewModel.class);
+        roomsViewModel.getLst_liveData().observe(this, new Observer<List<Rooms>>() {
+            @Override
+            public void onChanged(List<Rooms> rooms) {
+                updateTabs(rooms);
+            }
+        });
+
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(),getLifecycle());
         viewPager2.setAdapter(fragmentAdapter);
 
@@ -135,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 if(tab.getPosition()!=0)
                     addbtn.hide();
                 else if(tab.getPosition()==0) addbtn.show();
+
             }
 
             @Override
@@ -155,6 +190,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void updateTabs(List<Rooms> rooms) {
+        tabLayout.removeAllTabs(); // Xóa tất cả các tab hiện có
+        tabLayout.addTab(tabLayout.newTab().setText("All Room"));
+        // Thêm tab mới vào TabLayout với tên phòng tương ứng
+        for (Rooms room : rooms) {
+            tabLayout.addTab(tabLayout.newTab().setText(room.getName()));
+        }
+    }
+
     private void getWeatherForcast() {
         DecimalFormat df = new DecimalFormat("#.#");
         requestQueue = Volley.newRequestQueue(this);
@@ -169,12 +213,16 @@ public class MainActivity extends AppCompatActivity {
                         dataWeather = ProcessJson.gson.fromJson(weather,DataWeather.class);
 
                         String temp = df.format((float) (dataWeather.getMain().temp - 273.5));
+                        temper=temp;
                         String wind = df.format((float) (dataWeather.getWind().speed * 3.6));
                         int humidity = (int) dataWeather.getMain().humidity;
                         String weather_de = capitalizeFirstLetter(dataWeather.getWeather().get(0).description);
                         TvWeather.setText(weather_de);
                         TvTemperature.setText(temp + "°");
                         TvHumidityAndWind.setText("H:"+ humidity+"% W:"+wind);
+                        if (Float.parseFloat(temp) > 20) {
+                            createWeatherNotification();
+                        }
                         //Log.d("wweather", "H:"+ humidity+"% W:"+wind);
                         if(weather_de.contains("sun")){
                             imgWeather.setImageResource(R.drawable.sunny);
