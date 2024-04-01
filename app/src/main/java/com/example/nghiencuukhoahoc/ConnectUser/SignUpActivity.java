@@ -12,12 +12,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nghiencuukhoahoc.Model.User;
 import com.example.nghiencuukhoahoc.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -41,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String user = Email.getText().toString().trim();
+                String a=user;
                 String pass = Password.getText().toString().trim();
 
                 if(user.isEmpty()){
@@ -57,6 +60,12 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                    //
+                                    User user1=new User(getUserNameFromEmail(a),"0",a,pass);
+                                    FirebaseDatabase.getInstance().getReference("Users")
+                                            .child(user.getUid()).setValue(user1);
+                                    //
                                     user.sendEmailVerification();
                                     Toast.makeText(SignUpActivity.this,"Check email for verification",Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(SignUpActivity.this,SignInActivity.class));
@@ -79,7 +88,16 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    private String getUserNameFromEmail(String email) {
 
+        String[] parts = email.split("@");
+        if (parts.length > 0) {
+            String userName = parts[0].replaceAll("[^a-zA-Z0-9_]", "_");
+            return userName;
+        } else {
+            return email;
+        }
+    }
 
     private boolean validate() {
         boolean temp=true;

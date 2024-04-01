@@ -33,14 +33,23 @@ import com.example.nghiencuukhoahoc.Adapter.FragmentAdapter;
 import com.example.nghiencuukhoahoc.ConnectUser.SignInActivity;
 import com.example.nghiencuukhoahoc.Model.ProcessJson;
 import com.example.nghiencuukhoahoc.Model.Rooms;
+import com.example.nghiencuukhoahoc.Model.User;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 import com.example.nghiencuukhoahoc.Service.MyFirebaseMessagingService;
 import com.example.nghiencuukhoahoc.WeatherForcast.DataWeather;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.DecimalFormat;
@@ -65,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
     DataWeather dataWeather;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
     private RoomsViewModel roomsViewModel;
     Vibrator vibrator;
 
@@ -81,7 +92,32 @@ public class MainActivity extends AppCompatActivity {
         auth= FirebaseAuth.getInstance();
         if(auth.getCurrentUser().getEmail()!=null) username.setText(auth.getCurrentUser().getEmail());
         else if(auth.getCurrentUser().getPhoneNumber()!=null)username.setText(auth.getCurrentUser().getPhoneNumber());
+        pasfb();
+    }
+    private void pasfb()
+    {
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Users")
+                .child(firebaseUser.getUid()).child("room");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot drinkSnapshot:snapshot.getChildren()){
+                        Rooms room = drinkSnapshot.getValue(Rooms.class);
+                        roomsViewModel.addRoom(room);
+                    }
+                }
+                getTabLayOut();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void createWeatherNotification() {
@@ -91,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
                     , NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager=getSystemService(NotificationManager.class);
             manager.createNotificationChannel(chanel);
-            Toast.makeText(this,"WNOtii",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -121,13 +156,19 @@ public class MainActivity extends AppCompatActivity {
         String name = bundle.getString("Name");
         int gas = bundle.getInt("Gas");
         int fan = bundle.getInt("Fan");
-        Rooms  a = new Rooms(name,gas,fan);
+        Rooms  room = new Rooms(name,gas,fan);
         Log.e("Name:", name);
         Log.isLoggable("Gas:", gas);
         Log.isLoggable("Fan:", fan);
         if(requestCode == 100 && resultCode == 150)
         {
-            roomsViewModel.addRoom(a);
+            roomsViewModel.addRoom(room);
+            reference.child(name).setValue(room).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void avoid) {
+                    Toast.makeText(getApplicationContext(),"added",Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -146,11 +187,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void getTabLayOut() {
-//        tabLayout.addTab(tabLayout.newTab().setText("All Room"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Living Room"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Bedroom"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Kitchen"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Garage"));
         roomsViewModel = new ViewModelProvider(this).get(RoomsViewModel.class);
         roomsViewModel.getLst_liveData().observe(this, new Observer<List<Rooms>>() {
             @Override

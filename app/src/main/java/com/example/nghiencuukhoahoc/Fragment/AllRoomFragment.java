@@ -24,6 +24,9 @@ import com.example.nghiencuukhoahoc.Adapter.RoomAdapter;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 import com.example.nghiencuukhoahoc.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -31,6 +34,7 @@ public class AllRoomFragment extends Fragment  {
     private RecyclerView rcv_room;
     private RoomAdapter roomAdapter;
     private RoomsViewModel roomsViewModel ;
+    private FirebaseAuth mAuth;
 
     public RoomsViewModel getRoomsViewModel() {
         return roomsViewModel;
@@ -79,11 +83,24 @@ public class AllRoomFragment extends Fragment  {
             Toast.makeText(getContext(), "Edit", Toast.LENGTH_SHORT).show();
             return  true;
         } else if (item.getItemId() == R.id.action_delete) {
+            if(position != RecyclerView.NO_POSITION)
+            {
+
+                deleteFromFirebase(roomAdapter.getItem(position));
+
+            }
             roomsViewModel.removeRoom(roomAdapter.getItem(position));
             Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
             return  true;
         } else {
             return super.onContextItemSelected(item);
         }
+    }
+    private void deleteFromFirebase(Rooms rooms) {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(firebaseUser.getUid()).child("room").child(rooms.getName())
+                .removeValue();
     }
 }

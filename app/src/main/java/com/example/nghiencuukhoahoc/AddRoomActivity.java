@@ -53,7 +53,7 @@ public class AddRoomActivity extends AppCompatActivity{
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("User")
+        reference = rootNode.getReference("Users")
                 .child(firebaseUser.getUid()).child("room");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
