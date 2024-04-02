@@ -88,11 +88,11 @@ public class AllRoomFragment extends Fragment  {
             Toast.makeText(getContext(), "Edit", Toast.LENGTH_SHORT).show();
             return  true;
         } else if (item.getItemId() == R.id.action_delete) {
-            if(position != RecyclerView.NO_POSITION)
-            {
+//            if(position != RecyclerView.NO_POSITION)
+//            {
 
                 deleteFromFirebase(roomAdapter.getItem(position));
-            }
+//            }
             roomsViewModel.removeRoom(roomAdapter.getItem(position));
             Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
             return  true;
@@ -101,22 +101,24 @@ public class AllRoomFragment extends Fragment  {
         }
     }
     private void deleteFromFirebase(Rooms rooms) {
-        new AlertDialog.Builder(getActivity().getApplicationContext()).setTitle(getString(R.string.app_name))
-                .setMessage("Do you want to delete this item?")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//        new AlertDialog.Builder(getActivity().getApplicationContext()).setTitle(getString(R.string.app_name))
+//                .setMessage("Do you want to delete this item?")
+//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                }).setNegativeButton("CANCEL",null).show();
+//    }
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(firebaseUser.getUid()).child("room").child(rooms.getName())
+                .removeValue(new DatabaseReference.CompletionListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mAuth = FirebaseAuth.getInstance();
-                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                        FirebaseDatabase.getInstance().getReference("Users")
-                                .child(firebaseUser.getUid()).child("room").child(rooms.getName())
-                                .removeValue(new DatabaseReference.CompletionListener() {
-                                    @Override
-                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                        Toast.makeText(getActivity().getApplicationContext(), "delete data success",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        Toast.makeText(getActivity().getApplicationContext(), "delete data success",Toast.LENGTH_SHORT).show();
                     }
-                }).setNegativeButton("CANCEL",null).show();
-    }
+                });
+        }
 }

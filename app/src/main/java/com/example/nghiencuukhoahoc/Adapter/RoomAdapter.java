@@ -91,7 +91,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
                 menu.setHeaderTitle("Select Action");
-                menu.add(Menu.NONE, R.id.action_edit, Menu.NONE, "Edit");
+//                menu.add(Menu.NONE, R.id.action_edit, Menu.NONE, "Edit");
                 menu.add(Menu.NONE, R.id.action_delete, Menu.NONE, "Delete");
             }
         });
