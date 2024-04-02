@@ -74,6 +74,7 @@ public class LivingRoomFragment extends Fragment implements onItemClickListener 
             if (position == 0) { // Gas
                 Intent intent = new Intent(getActivity(), GasActivity.class);
                 intent.putExtra("name", name);
+                intent.putExtra("value", value);
                 startActivity(intent);
             }else if (position == 1) { //Fan
                 Intent intent = new Intent(getActivity(), FanActivity.class);

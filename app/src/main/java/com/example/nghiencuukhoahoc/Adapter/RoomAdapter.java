@@ -82,7 +82,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
             @Override
             public boolean onLongClick(View v) {
                 setSelectedPosition(holder.getAdapterPosition());
-                notifyDataSetChanged(); // Cập nhật lại adapter để cập nhật giao diện người dùng
+                notifyDataSetChanged();
                 return false;
             }
         });

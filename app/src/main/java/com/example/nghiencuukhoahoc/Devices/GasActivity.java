@@ -40,8 +40,6 @@ public class GasActivity extends AppCompatActivity {
     ImageButton btn_timer;
     private TimerDialog myDialog;
     private AnimationDrawable rocketAnimation;
-    Drawable currentFrame, checkFrame;
-    private int frameNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -256,10 +254,6 @@ public class GasActivity extends AppCompatActivity {
         iconFan = findViewById(R.id.icon_fan);
         aSwitchFan = findViewById(R.id.switch_fan);
         img_back = findViewById(R.id.img_back_fan);
-//        animationRotate1 = AnimationUtils.loadAnimation(getApplicationContext(),
-//                R.anim.rotate);
-//        animationRotate2 = AnimationUtils.loadAnimation(getApplicationContext(),
-//                R.anim.rotate);
         imgView.setBackgroundResource(R.drawable.toto);
         rocketAnimation = (AnimationDrawable) imgView.getBackground();
         progressBarTimer = findViewById(R.id.progressBar_timeRemaining_fan);
@@ -267,8 +261,6 @@ public class GasActivity extends AppCompatActivity {
         btn_timer = findViewById(R.id.btn_timer_fan);
     }
     private void OnGas(){
-//        iconFan.startAnimation(animationRotate2);
-//        imgView.startAnimation(animationRotate1);
         imgView.setBackgroundResource(R.drawable.toto);
         rocketAnimation = (AnimationDrawable) imgView.getBackground();
         rocketAnimation.start();
@@ -276,10 +268,7 @@ public class GasActivity extends AppCompatActivity {
         aSwitchFan.setText("ON");
     }
     private void OffGas(){
-//        imgView.clearAnimation();
-//        iconFan.clearAnimation();
         rocketAnimation.stop();
-//        imgView.setBackgroundResource(R.drawable.mobile1);
         aSwitchFan.setChecked(false);
         aSwitchFan.setText("OFF");
     }
