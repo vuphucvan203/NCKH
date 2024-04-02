@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Devices.GasActivity">
+    tools:context=".Devices.GazActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,14 +18,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/img_back_fan"
+            android:id="@+id/img_back_gaz"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/btn_return" />
         <TextView
-            android:id="@+id/tv_nameRoom_fan"
+            android:id="@+id/tv_nameRoom_gaz"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="20sp"
@@ -37,7 +37,7 @@
         android:layout_marginTop="50dp"
         android:layout_height="300dp">
         <ImageView
-            android:id="@+id/img_fan"
+            android:id="@+id/img_gaz"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
@@ -47,7 +47,7 @@
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-          
+            android:src="@drawable/mobile1"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -56,11 +56,11 @@
         android:layout_height="150dp">
 
         <ImageView
-            android:id="@+id/icon_fan"
+            android:id="@+id/icon_gaz"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerInside"
-            android:src="@drawable/detoc"
+            android:src="@drawable/gas_detector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.102"
@@ -77,20 +77,20 @@
             android:text="Sensor"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon_fan" />
+            app:layout_constraintTop_toBottomOf="@+id/icon_gaz" />
 
         <Switch
-            android:id="@+id/switch_fan"
+            android:id="@+id/switch_gaz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="168dp"
             android:layout_marginTop="48dp"
             android:text="OFF"
-            app:layout_constraintStart_toEndOf="@+id/icon_fan"
+            app:layout_constraintStart_toEndOf="@+id/icon_gaz"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/btn_timer_fan"
+            android:id="@+id/btn_timer_gaz"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="192dp"
@@ -99,10 +99,10 @@
             android:scaleType="centerCrop"
             android:src="@drawable/clock"
             app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/switch_fan" />
+            app:layout_constraintTop_toBottomOf="@+id/switch_gaz" />
 
         <ProgressBar
-            android:id="@+id/progressBar_timeRemaining_fan"
+            android:id="@+id/progressBar_timeRemaining_gaz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -114,10 +114,10 @@
             android:progressDrawable="@drawable/circular_progress_bar"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/switch_fan" />
+            app:layout_constraintTop_toBottomOf="@+id/switch_gaz" />
 
         <TextView
-            android:id="@+id/tv_countdownTime_fan"
+            android:id="@+id/tv_countdownTime_gaz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -127,6 +127,6 @@
             android:textSize="20sp"
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/switch_fan" />
+            app:layout_constraintTop_toBottomOf="@+id/switch_gaz" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

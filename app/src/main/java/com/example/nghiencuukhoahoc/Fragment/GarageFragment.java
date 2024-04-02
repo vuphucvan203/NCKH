@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nghiencuukhoahoc.Adapter.DeviceAdapter;
 import com.example.nghiencuukhoahoc.Adapter.onItemClickListener;
 import com.example.nghiencuukhoahoc.Devices.FanActivity;
-import com.example.nghiencuukhoahoc.Devices.GasActivity;
+import com.example.nghiencuukhoahoc.Devices.GazActivity;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 import com.example.nghiencuukhoahoc.R;
@@ -72,7 +72,7 @@ public class GarageFragment extends Fragment implements onItemClickListener {
         if(value!=-1)
         {
             if (position == 0) { // Gas
-                Intent intent = new Intent(getActivity(), GasActivity.class);
+                Intent intent = new Intent(getActivity(), GazActivity.class);
                 intent.putExtra("name", name);
                 startActivity(intent);
             }else if (position == 1) { //Fan

@@ -2,7 +2,7 @@ package com.example.nghiencuukhoahoc.Model;
 
 public class Rooms {
     private String name;
-    private float temperature, humadity, gas;
+    private float temperature, humadity;
     private int Number_devices;
 
     public int getFan_state() {

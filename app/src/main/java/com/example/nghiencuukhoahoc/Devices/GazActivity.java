@@ -2,12 +2,10 @@ package com.example.nghiencuukhoahoc.Devices;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,7 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.DataSingleton;
@@ -25,15 +27,14 @@ import com.example.nghiencuukhoahoc.Timer.TimerDialogOnClicked;
 
 import java.util.List;
 
-public class GasActivity extends AppCompatActivity {
-    ImageView imgView ,iconFan,img_back;
-    Animation animationRotate1,animationRotate2;
+public class GazActivity extends AppCompatActivity {
+
+    ImageView imgView ,icongaz,img_back;
     TextView tv_nameRoom,tv_Remaining;
-    Switch aSwitchFan;
+    Switch aSwitchGaz;
     private List<Rooms> lst_rooms ;
-    private int id_Room,value ,curr_value;
+    private int id_Room,value=0 ,curr_value;
     String name_room;
-    private final String TOPIC = "$aws/things/smart_home/shadow/name/test/update";
     private int timeRemaining;
     private ProgressBar progressBarTimer;
     CountDownTimer countDownTimer;
@@ -43,8 +44,9 @@ public class GasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gas);
-        InitWidgets();
+        setContentView(R.layout.activity_gaz);
+        initUI();
+//        iotConnect = IotConnect.getInstance(getApplicationContext());
         Intent it = getIntent();
         name_room = it.getStringExtra("name");
         if(name_room.equals("kitchen")){
@@ -60,27 +62,23 @@ public class GasActivity extends AppCompatActivity {
         //get current data
         lst_rooms = DataSingleton.getInstance().getSharedData();
         //  test data
-        Log.d("GasActivity", "onCreate: "+lst_rooms.get(0).getGas_state()+ "-" +
-                lst_rooms.get(0).getName());
+
         for(int i =0 ; i < lst_rooms.size() ; i++){
             if(lst_rooms.get(i).getName().equals(name_room)){
                 value = lst_rooms.get(i).getGas_state();
                 id_Room = i;
+
                 break;
             }
         }
+        Log.d("GazActivity", "onCreate: "+lst_rooms.get(id_Room).getGas_state()+ "-" +
+                lst_rooms.get(id_Room).getName());
         if(value == 0){
             OffGas();
         }else{
             OnGas();
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("chán quá mãi không fix được lỗi này", "Hairrrr");
-                onBackPressed();
-            }
-        });
-        aSwitchFan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        }
+        aSwitchGaz.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!b){
@@ -97,8 +95,8 @@ public class GasActivity extends AppCompatActivity {
                         "  \"state\": {\n" +
                         "    \"desired\": {\n" +
                         "        \"livingRoom\": " + "{\n" +
-                        "           \"fan_state\": " + curr_value + ",\n" +
-                        "           \"name\": \"livingRoom\"\n" +
+                        "           \"gaz_state\": " + curr_value + ",\n" +
+                        "           \"name\": \""+lst_rooms.get(id_Room).getName()+"\"\n" +
                         "         }\n" +
                         "     }\n" +
                         "  }\n" +
@@ -122,10 +120,16 @@ public class GasActivity extends AppCompatActivity {
 //                }).start();
             }
         });
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         btn_timer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myDialog = new TimerDialog(GasActivity.this, new TimerDialogOnClicked() {
+                myDialog = new TimerDialog(GazActivity.this, new TimerDialogOnClicked() {
                     @Override
                     public void onButtonTurnONClicked(int hour,int minute,int second) {
                         timeRemaining = (hour*60*60 + minute*60 + second) * 1000;
@@ -153,8 +157,8 @@ public class GasActivity extends AppCompatActivity {
                                         "  \"state\": {\n" +
                                         "    \"desired\": {\n" +
                                         "        \"livingRoom\": " + "{\n" +
-                                        "           \"fan_state\": " + curr_value + ",\n" +
-                                        "           \"name\": \"livingRoom\"\n" +
+                                        "           \"gaz_state\": " + curr_value + ",\n" +
+                                        "           \"name\": \""+lst_rooms.get(id_Room).getName()+"\"\n" +
                                         "         }\n" +
                                         "     }\n" +
                                         "  }\n" +
@@ -176,7 +180,7 @@ public class GasActivity extends AppCompatActivity {
 //                                        }
 //                                    }
 //                                }).start();
-                                OnGas();
+                                OffGas();
                                 btn_timer.setVisibility(View.VISIBLE);
                                 progressBarTimer.setVisibility(View.INVISIBLE);
                                 tv_Remaining.setVisibility(View.INVISIBLE);
@@ -212,8 +216,8 @@ public class GasActivity extends AppCompatActivity {
                                         "  \"state\": {\n" +
                                         "    \"desired\": {\n" +
                                         "        \"livingRoom\": " + "{\n" +
-                                        "           \"fan_state\": " + curr_value + ",\n" +
-                                        "           \"name\": \"livingRoom\"\n" +
+                                        "           \"gaz_state\": " + curr_value + ",\n" +
+                                        "           \"name\": \""+lst_rooms.get(id_Room).getName()+"\"\n" +
                                         "         }\n" +
                                         "     }\n" +
                                         "  }\n" +
@@ -247,29 +251,28 @@ public class GasActivity extends AppCompatActivity {
             }
         });
     }
-}
-    private void InitWidgets() {
-        tv_nameRoom = findViewById(R.id.tv_nameRoom_fan);
-        imgView = findViewById(R.id.img_fan);
-        iconFan = findViewById(R.id.icon_fan);
-        aSwitchFan = findViewById(R.id.switch_fan);
-        img_back = findViewById(R.id.img_back_fan);
-        imgView.setBackgroundResource(R.drawable.toto);
-        rocketAnimation = (AnimationDrawable) imgView.getBackground();
-        progressBarTimer = findViewById(R.id.progressBar_timeRemaining_fan);
-        tv_Remaining = findViewById(R.id.tv_countdownTime_fan);
-        btn_timer = findViewById(R.id.btn_timer_fan);
-    }
     private void OnGas(){
         imgView.setBackgroundResource(R.drawable.toto);
         rocketAnimation = (AnimationDrawable) imgView.getBackground();
         rocketAnimation.start();
-        aSwitchFan.setChecked(true);
-        aSwitchFan.setText("ON");
+        aSwitchGaz.setChecked(true);
+        aSwitchGaz.setText("ON");
     }
     private void OffGas(){
         rocketAnimation.stop();
-        aSwitchFan.setChecked(false);
-        aSwitchFan.setText("OFF");
+        aSwitchGaz.setChecked(false);
+        aSwitchGaz.setText("OFF");
+    }
+    private void initUI() {
+        tv_nameRoom = findViewById(R.id.tv_nameRoom_gaz);
+        imgView = findViewById(R.id.img_gaz);
+        icongaz = findViewById(R.id.icon_gaz);
+        aSwitchGaz = findViewById(R.id.switch_gaz);
+        img_back = findViewById(R.id.img_back_gaz);
+        imgView.setBackgroundResource(R.drawable.toto);
+        rocketAnimation = (AnimationDrawable) imgView.getBackground();
+        progressBarTimer = findViewById(R.id.progressBar_timeRemaining_gaz);
+        tv_Remaining = findViewById(R.id.tv_countdownTime_gaz);
+        btn_timer = findViewById(R.id.btn_timer_gaz);
     }
 }

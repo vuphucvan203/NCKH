@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.example.nghiencuukhoahoc.Adapter.DeviceAdapter;
 import com.example.nghiencuukhoahoc.Adapter.onItemClickListener;
 import com.example.nghiencuukhoahoc.Devices.FanActivity;
-import com.example.nghiencuukhoahoc.Devices.GasActivity;
+import com.example.nghiencuukhoahoc.Devices.GazActivity;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 import com.example.nghiencuukhoahoc.R;
@@ -79,7 +79,7 @@ public class KitchenFragment extends Fragment implements onItemClickListener {
         if(value!=-1)
         {
             if (position == 0) {
-                Intent intent = new Intent(getActivity(), GasActivity.class);
+                Intent intent = new Intent(getActivity(), GazActivity.class);
                 intent.putExtra("name", name);
                 intent.putExtra("value", value);
                 startActivity(intent);
