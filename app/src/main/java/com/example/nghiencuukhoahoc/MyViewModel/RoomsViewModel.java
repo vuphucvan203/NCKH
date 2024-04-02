@@ -24,7 +24,7 @@ public class RoomsViewModel extends ViewModel {
     }
     private void initData() {
         lst  = new ArrayList<>();
-        lst.add(new Rooms("livingRoom",1,1));
+        lst.add(new Rooms("living room",1,0));
         LiveData.setValue(lst);
         dataSingleton.setSharedData(lst);
     }

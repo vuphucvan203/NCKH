@@ -228,10 +228,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateTabs(List<Rooms> rooms) {
         tabLayout.removeAllTabs(); // Xóa tất cả các tab hiện có
-        tabLayout.addTab(tabLayout.newTab().setText("All Room"));
+        tabLayout.addTab(tabLayout.newTab().setText("All room"));
         // Thêm tab mới vào TabLayout với tên phòng tương ứng
         for (Rooms room : rooms) {
-            tabLayout.addTab(tabLayout.newTab().setText(room.getName()));
+            tabLayout.addTab(tabLayout.newTab().setText(capitalizeFirstLetter(room.getName())));
         }
     }
 

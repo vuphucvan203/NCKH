@@ -31,7 +31,7 @@ public class GasActivity extends AppCompatActivity {
     TextView tv_nameRoom,tv_Remaining;
     Switch aSwitchFan;
     private List<Rooms> lst_rooms ;
-    private int id_Room,value = 0,curr_value;
+    private int id_Room,value ,curr_value;
     String name_room;
     private final String TOPIC = "$aws/things/smart_home/shadow/name/test/update";
     private int timeRemaining;
@@ -51,17 +51,17 @@ public class GasActivity extends AppCompatActivity {
         name_room = it.getStringExtra("name");
         if(name_room.equals("kitchen")){
             tv_nameRoom.setText("Kitchen");
-        }else if(name_room.equals("living")){
-            tv_nameRoom.setText("Living Room");
+        }else if(name_room.equals("living room")){
+            tv_nameRoom.setText("Living room");
         }else if(name_room.equals("garage")) {
             tv_nameRoom.setText("Garage");
         }else
         {
-            tv_nameRoom.setText("Bed Room");
+            tv_nameRoom.setText("Bedroom");
         }
         //get current data
         lst_rooms = DataSingleton.getInstance().getSharedData();
-        //  tesst data
+        //  test data
         Log.d("GasActivity", "onCreate: "+lst_rooms.get(0).getGas_state()+ "-" +
                 lst_rooms.get(0).getName());
         for(int i =0 ; i < lst_rooms.size() ; i++){
@@ -72,12 +72,13 @@ public class GasActivity extends AppCompatActivity {
             }
         }
         if(value == 0){
-            OffFan();
+            OffGas();
         }else{
-            OnFan();
+            OnGas();
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("chán quá mãi không fix được lỗi này", "Hairrrr");
                 onBackPressed();
             }
         });
@@ -85,10 +86,10 @@ public class GasActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!b){
-                    OffFan();
+                    OffGas();
                     lst_rooms.get(id_Room).setGas_state(0);
                 }else{
-                    OnFan();
+                    OnGas();
                     lst_rooms.get(id_Room).setGas_state(1);
                 }
                 curr_value = b ?  1 : 0 ;
@@ -177,7 +178,7 @@ public class GasActivity extends AppCompatActivity {
 //                                        }
 //                                    }
 //                                }).start();
-                                OnFan();
+                                OnGas();
                                 btn_timer.setVisibility(View.VISIBLE);
                                 progressBarTimer.setVisibility(View.INVISIBLE);
                                 tv_Remaining.setVisibility(View.INVISIBLE);
@@ -236,7 +237,7 @@ public class GasActivity extends AppCompatActivity {
 //                                        }
 //                                    }
 //                                }).start();
-                                OffFan();
+                                OffGas();
                                 btn_timer.setVisibility(View.VISIBLE);
                                 progressBarTimer.setVisibility(View.INVISIBLE);
                                 tv_Remaining.setVisibility(View.INVISIBLE);
@@ -248,7 +249,6 @@ public class GasActivity extends AppCompatActivity {
             }
         });
     }
-
 }
     private void InitWidgets() {
         tv_nameRoom = findViewById(R.id.tv_nameRoom_fan);
@@ -266,7 +266,7 @@ public class GasActivity extends AppCompatActivity {
         tv_Remaining = findViewById(R.id.tv_countdownTime_fan);
         btn_timer = findViewById(R.id.btn_timer_fan);
     }
-    private void OnFan(){
+    private void OnGas(){
 //        iconFan.startAnimation(animationRotate2);
 //        imgView.startAnimation(animationRotate1);
         imgView.setBackgroundResource(R.drawable.toto);
@@ -275,7 +275,7 @@ public class GasActivity extends AppCompatActivity {
         aSwitchFan.setChecked(true);
         aSwitchFan.setText("ON");
     }
-    private void OffFan(){
+    private void OffGas(){
 //        imgView.clearAnimation();
 //        iconFan.clearAnimation();
         rocketAnimation.stop();

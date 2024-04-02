@@ -53,15 +53,20 @@ public class FanActivity extends AppCompatActivity {
 //        iotConnect = IotConnect.getInstance(getApplicationContext());
         Intent it = getIntent();
         name_room = it.getStringExtra("name");
-        if(name_room.equals("bedRoom")){
-            tv_nameRoom.setText("Bed Room");
-        }else {
-            tv_nameRoom.setText("Living Room");
+        if(name_room.equals("kitchen")){
+            tv_nameRoom.setText("Kitchen");
+        }else if(name_room.equals("living room")){
+            tv_nameRoom.setText("Living room");
+        }else if(name_room.equals("garage")) {
+            tv_nameRoom.setText("Garage");
+        }else
+        {
+            tv_nameRoom.setText("Bedroom");
         }
         //get current data
         lst_rooms = DataSingleton.getInstance().getSharedData();
-        //  tesst data
-        Log.d("LampActivity", "onCreate: "+lst_rooms.get(0).getFan_state()+ "-" +
+        //  test data
+        Log.d("FanActivity", "onCreate: "+lst_rooms.get(0).getFan_state()+ "-" +
                 lst_rooms.get(0).getName());
         for(int i =0 ; i < lst_rooms.size() ; i++){
             if(lst_rooms.get(i).getName().equals(name_room)){

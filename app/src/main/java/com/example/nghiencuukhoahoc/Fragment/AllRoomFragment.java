@@ -92,7 +92,6 @@ public class AllRoomFragment extends Fragment  {
             {
 
                 deleteFromFirebase(roomAdapter.getItem(position));
-
             }
             roomsViewModel.removeRoom(roomAdapter.getItem(position));
             Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
@@ -119,6 +118,5 @@ public class AllRoomFragment extends Fragment  {
                                 });
                     }
                 }).setNegativeButton("CANCEL",null).show();
-
     }
 }

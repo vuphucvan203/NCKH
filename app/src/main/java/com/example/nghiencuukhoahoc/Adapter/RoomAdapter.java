@@ -61,7 +61,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
                 holder.imgRoom.setImageResource(R.drawable.bedroom);
                 holder.tvDevices.setText(currRoom.getNumber_devices() + " Devices");
                 break;
-            case "livingRoom" :
+            case "living room" :
                 holder.tvNameRoom.setText("Living room");
                 holder.imgRoom.setImageResource(R.drawable.livingroom);
                 holder.tvDevices.setText(currRoom.getNumber_devices() + " Devices");

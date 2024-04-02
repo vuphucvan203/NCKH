@@ -78,7 +78,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
                 holder.img_status.setImageResource(R.drawable.red_dot);
                 holder.tv_status.setText("Not available");
             }
-            else if(rooms.getGas_state() == 0){
+            else if(rooms.getGas_state() == 1){
                 holder.tv_index.setTextSize(12);
                 holder.tv_index.setText("Detected gas!");
                 holder.img_status.setImageResource(R.drawable.warning);
