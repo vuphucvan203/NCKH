@@ -76,8 +76,7 @@ dependencies {
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
-    //NotificationCompat
-    implementation("androidx.core:core-ktx:2.2.0")
+
 
 
     // Add the dependency for the Realtime Database library

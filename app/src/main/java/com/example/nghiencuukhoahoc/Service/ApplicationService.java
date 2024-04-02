@@ -8,7 +8,7 @@ import android.os.Build;
 import com.example.nghiencuukhoahoc.R;
 
 public class ApplicationService extends Application {
-    private static final String CHANNEL_ID ="Chanel1" ;
+    public static final String CHANNEL_ID ="Chanel1" ;
 
     @Override
     public void onCreate() {
@@ -28,7 +28,9 @@ public class ApplicationService extends Application {
             // or other notification behaviors after this.
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             if(notificationManager!=null)
-            notificationManager.createNotificationChannel(channel);
+            {
+                notificationManager.createNotificationChannel(channel);
+            }
         }
     }
 }

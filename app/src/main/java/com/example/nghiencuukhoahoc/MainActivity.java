@@ -3,14 +3,19 @@ package com.example.nghiencuukhoahoc;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Dialog;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaCodec;
 import android.net.Uri;
 import android.os.Build;
@@ -35,6 +40,7 @@ import com.example.nghiencuukhoahoc.Model.ProcessJson;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.Model.User;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
+import com.example.nghiencuukhoahoc.Service.ApplicationService;
 import com.example.nghiencuukhoahoc.Service.MyFirebaseMessagingService;
 import com.example.nghiencuukhoahoc.WeatherForcast.DataWeather;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,6 +59,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -128,6 +135,25 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager manager=getSystemService(NotificationManager.class);
             manager.createNotificationChannel(chanel);
         }
+    }
+    private void sendNotification(){
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
+        Notification notification=new NotificationCompat.Builder(this, ApplicationService.CHANNEL_ID)
+                .setContentTitle("SmartHome Notification")
+                .setContentText("Excessive Heat.Becareful!")
+                .setSmallIcon(R.drawable.anh1)
+                .setLargeIcon(bitmap)
+                .setColor(getResources().getColor(R.color.Instagram3))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build();
+        NotificationManager notificationManager =(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(notificationManager!=null){
+            notificationManager.notify(getNotificationID(),notification);
+        }
+    }
+
+    private int getNotificationID() {
+        return (int)new Date().getTime();
     }
 
     private void initEvent()
@@ -256,8 +282,9 @@ public class MainActivity extends AppCompatActivity {
                         TvWeather.setText(weather_de);
                         TvTemperature.setText(temp + "°");
                         TvHumidityAndWind.setText("H:"+ humidity+"% W:"+wind);
-                        if (Float.parseFloat(temp) > 20) {
+                        if (Float.parseFloat(temp) > 30) {
                             createWeatherNotification();
+                            sendNotification();
                         }
                         //Log.d("wweather", "H:"+ humidity+"% W:"+wind);
                         if(weather_de.contains("sun")){
