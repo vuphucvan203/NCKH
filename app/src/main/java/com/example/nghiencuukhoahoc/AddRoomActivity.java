@@ -178,9 +178,9 @@ public class AddRoomActivity extends AppCompatActivity{
                     if(isBedRoom) name = "bedroom";
                     if(isKitchen) name = "kitchen";
                     if(isGarage) name = "garage";
-                    if(isGas) gasIndex = 1;
+                    if(isGas) gasIndex =0;
                     else gasIndex = -1;
-                    if(isFan) fanIndex = 1;
+                    if(isFan) fanIndex = 0;
                     else fanIndex = -1;
 
                     bundle.putString("Name", name);
