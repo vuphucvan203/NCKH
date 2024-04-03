@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -62,7 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                                     //
-                                    User user1=new User(getUserNameFromEmail(a),"0",a,pass);
+                                    User user1=new User(getUserNameFromEmail(a),generateRandomPhoneNumber(),a,pass);
                                     FirebaseDatabase.getInstance().getReference("Users")
                                             .child(user.getUid()).setValue(user1);
                                     //
@@ -98,7 +100,16 @@ public class SignUpActivity extends AppCompatActivity {
             return email;
         }
     }
-
+    public static String generateRandomPhoneNumber() {
+        Random random = new Random();
+        String[] prefixes = {"03", "05", "07", "08", "09"};
+        String prefix = prefixes[random.nextInt(prefixes.length)];
+        String phoneNumber = prefix;
+        for (int i = 0; i < 7; i++) {
+            phoneNumber += random.nextInt(10);
+        }
+        return phoneNumber;
+    }
     private boolean validate() {
         boolean temp=true;
         String pass=Password.getText().toString();
