@@ -2,6 +2,7 @@ package com.example.nghiencuukhoahoc.Fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -23,6 +24,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nghiencuukhoahoc.Adapter.RoomAdapter;
+import com.example.nghiencuukhoahoc.Devices.FanActivity;
+import com.example.nghiencuukhoahoc.Devices.GazActivity;
 import com.example.nghiencuukhoahoc.MainActivity;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
@@ -70,6 +73,8 @@ public class AllRoomFragment extends Fragment  {
                 rcv_room.setAdapter(roomAdapter);
             }
         });
+
+
         return view;
     }
 
