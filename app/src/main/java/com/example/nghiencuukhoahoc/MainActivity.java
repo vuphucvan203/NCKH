@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         initEvent();
         auth= FirebaseAuth.getInstance();
         if(auth.getCurrentUser().getEmail()!=null) username.setText(auth.getCurrentUser().getEmail());
-        else if(auth.getCurrentUser().getPhoneNumber()!=null)username.setText(auth.getCurrentUser().getPhoneNumber());
+        else if(auth.getCurrentUser().getPhoneNumber()!=null) username.setText(auth.getCurrentUser().getPhoneNumber());
         pasfb();
     }
     private void pasfb()
@@ -258,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
         // Thêm tab mới vào TabLayout với tên phòng tương ứng
         for (Rooms room : rooms) {
             tabLayout.addTab(tabLayout.newTab().setText(capitalizeFirstLetter(room.getName())));
+            //fragmentAdapter.createFragment(1);
         }
     }
 

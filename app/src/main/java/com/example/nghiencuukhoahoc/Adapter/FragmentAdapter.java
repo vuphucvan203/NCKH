@@ -13,6 +13,7 @@ import com.example.nghiencuukhoahoc.Fragment.BedRoomFragment;
 import com.example.nghiencuukhoahoc.Fragment.GarageFragment;
 import com.example.nghiencuukhoahoc.Fragment.KitchenFragment;
 import com.example.nghiencuukhoahoc.Fragment.LivingRoomFragment;
+import com.example.nghiencuukhoahoc.Fragment.RoomFragment;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
 
 public class FragmentAdapter extends FragmentStateAdapter {
@@ -40,10 +41,7 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position)
     {
         if (position == 0) return new AllRoomFragment(roomsViewModel);
-        if (position == 1) return new LivingRoomFragment();
-        if (position == 2) return new BedRoomFragment();
-        if (position == 3) return new KitchenFragment();
-        else return new GarageFragment();
+        else return new RoomFragment();
     }
 
     @Override
