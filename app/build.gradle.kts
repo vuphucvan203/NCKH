@@ -78,6 +78,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor")
 
 
+
     // Add the dependency for the Realtime Database library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-database")
