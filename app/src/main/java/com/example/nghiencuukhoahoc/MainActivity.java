@@ -184,8 +184,8 @@ public class MainActivity extends AppCompatActivity {
         int fan = bundle.getInt("Fan");
         Rooms  room = new Rooms(name,gas,fan);
         Log.e("Name:", name);
-        Log.isLoggable("Gas:", gas);
-        Log.isLoggable("Fan:", fan);
+        Log.d("Gas:", Integer.toString(gas));
+        Log.d("Fan:", Integer.toString(fan));
         if(requestCode == 100 && resultCode == 150)
         {
             roomsViewModel.addRoom(room);

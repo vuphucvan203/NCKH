@@ -174,7 +174,7 @@ public class AddRoomActivity extends AppCompatActivity{
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
 
-                    if(isLivingRoom) name = "livingRoom";
+                    if(isLivingRoom) name = "living room";
                     if(isBedRoom) name = "bedroom";
                     if(isKitchen) name = "kitchen";
                     if(isGarage) name = "garage";

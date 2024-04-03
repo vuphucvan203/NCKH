@@ -146,7 +146,6 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.devicesVi
             }if(getAdapterPosition() == 1){
                 listener.onItemClick(getAdapterPosition(), rooms.getName(), rooms.getFan_state());
             }
-
         }
     }
 }

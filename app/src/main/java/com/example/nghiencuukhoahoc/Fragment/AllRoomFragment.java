@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nghiencuukhoahoc.Adapter.RoomAdapter;
+import com.example.nghiencuukhoahoc.Adapter.onItemClickListener;
 import com.example.nghiencuukhoahoc.Devices.FanActivity;
 import com.example.nghiencuukhoahoc.Devices.GazActivity;
 import com.example.nghiencuukhoahoc.MainActivity;
@@ -38,7 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class AllRoomFragment extends Fragment  {
+public class AllRoomFragment extends Fragment{
     private RecyclerView rcv_room;
     private RoomAdapter roomAdapter;
     private RoomsViewModel roomsViewModel ;
@@ -73,8 +74,6 @@ public class AllRoomFragment extends Fragment  {
                 rcv_room.setAdapter(roomAdapter);
             }
         });
-
-
         return view;
     }
 

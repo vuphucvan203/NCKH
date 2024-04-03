@@ -55,7 +55,8 @@ public class RoomFragment extends Fragment implements onItemClickListener {
                 new Observer<List<Rooms>>() {
                     @Override
                     public void onChanged(List<Rooms> rooms) {
-                        for(int i =0 ; i < rooms.size(); i++){
+                        for(int i = 0 ; i < rooms.size(); i++){
+                            Log.e("Type room: ", rooms.get(i).getName());
                             if(rooms.get(i).getName().equals("bedroom")){
                                 adapterDevices.SetData(rooms.get(i));
                                 break;
@@ -64,7 +65,7 @@ public class RoomFragment extends Fragment implements onItemClickListener {
                                 adapterDevices.SetData(rooms.get(i));
                                 break;
                             }
-                            if(rooms.get(i).getName().equals("livingroom")){
+                            if(rooms.get(i).getName().equals("living room")){
                                 adapterDevices.SetData(rooms.get(i));
                                 break;
                             }

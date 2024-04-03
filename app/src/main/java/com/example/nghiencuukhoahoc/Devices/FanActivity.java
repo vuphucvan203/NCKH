@@ -16,10 +16,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 //import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos;
 //import com.example.nghiencuukhoahoc.connectAWSIoT.IotConnect;
+import com.example.nghiencuukhoahoc.Adapter.DeviceAdapter;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.DataSingleton;
 import com.example.nghiencuukhoahoc.R;
@@ -45,6 +47,8 @@ public class FanActivity extends AppCompatActivity {
     ImageButton btn_timer;
     AnimationDrawable rocketAnimation;
     private TimerDialog myDialog;
+
+    protected DeviceAdapter deviceAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +94,8 @@ public class FanActivity extends AppCompatActivity {
                     OnFan();
                     lst_rooms.get(id_Room).setFan_state(1);
                 }
+                //deviceAdapter.onBindViewHolder(holder, 0);
+                //deviceAdapter.onBindViewHolder(holder, 1);
                 curr_value = b ?  1 : 0 ;
 //                String message = processJson.convert_Rooms_to_Json(lst_rooms);
 //                Log.i("CHeckJson", "json : "+ message);
