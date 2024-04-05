@@ -13,15 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nghiencuukhoahoc.MainActivity;
+import com.example.nghiencuukhoahoc.Model.User;
 import com.example.nghiencuukhoahoc.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +37,7 @@ public class SigninwithPhone extends AppCompatActivity {
     private EditText Phone,OTP;
 
     private Button signup,btnOTP;
-
+    private String pnub;
     private TextView redirectTextToLogin,redirectTextToEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class SigninwithPhone extends AppCompatActivity {
             public void onClick(View v) {
                 String user = Phone.getText().toString().trim();
                 String pass = OTP.getText().toString().trim();
-
+                pnub=user;
                 if(user.isEmpty()){
                     Phone.setError("Phone cant be empty");
                 }
@@ -137,6 +140,10 @@ public class SigninwithPhone extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    User user1=new User(pnub);
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(user.getUid()).setValue(user1);
                     Toast.makeText(SigninwithPhone.this,"Success",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SigninwithPhone.this, MainActivity.class));
                 }
