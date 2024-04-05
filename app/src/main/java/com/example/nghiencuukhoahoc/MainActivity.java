@@ -213,6 +213,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void getTabLayOut() {
+        tabLayout.addTab(tabLayout.newTab().setText("All room"));
+        tabLayout.addTab(tabLayout.newTab().setText("Living room"));
+        tabLayout.addTab(tabLayout.newTab().setText("Bedroom"));
+        tabLayout.addTab(tabLayout.newTab().setText("Kitchen"));
+        tabLayout.addTab(tabLayout.newTab().setText("Garage"));
         roomsViewModel = new ViewModelProvider(this).get(RoomsViewModel.class);
         roomsViewModel.getLst_liveData().observe(this, new Observer<List<Rooms>>() {
             @Override

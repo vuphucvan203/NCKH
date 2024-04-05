@@ -41,7 +41,10 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position)
     {
         if (position == 0) return new AllRoomFragment(roomsViewModel);
-        else return new RoomFragment();
+        if (position == 1) return new LivingRoomFragment();
+        if (position == 2) return new BedRoomFragment();
+        if (position == 3) return new KitchenFragment();
+        else return  new GarageFragment();
     }
 
     @Override
