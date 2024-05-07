@@ -1,4 +1,5 @@
 package com.example.nghiencuukhoahoc.Devices;
+
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +19,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos;
-import com.example.nghiencuukhoahoc.ConnectIot.IotConnect;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.MyViewModel.DataSingleton;
 import com.example.nghiencuukhoahoc.R;
@@ -34,11 +32,9 @@ public class GazActivity extends AppCompatActivity {
     ImageView imgView ,icongaz,img_back;
     TextView tv_nameRoom,tv_Remaining;
     Switch aSwitchGaz;
-    private IotConnect iotConnect;
     private List<Rooms> lst_rooms ;
     private int id_Room,value=0 ,curr_value;
     String name_room;
-    private final String TOPIC = "$aws/things/esp/shadow/name/test/update";
     private int timeRemaining;
     private ProgressBar progressBarTimer;
     CountDownTimer countDownTimer;
@@ -50,9 +46,8 @@ public class GazActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gaz);
         initUI();
-        iotConnect = IotConnect.getInstance(getApplicationContext());
+//        iotConnect = IotConnect.getInstance(getApplicationContext());
         Intent it = getIntent();
-
         name_room = it.getStringExtra("name");
         if(name_room.equals("kitchen")){
             tv_nameRoom.setText("Kitchen");
@@ -106,23 +101,23 @@ public class GazActivity extends AppCompatActivity {
                         "     }\n" +
                         "  }\n" +
                         "}";
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            iotConnect.mqttManager.publishString(message, TOPIC, AWSIotMqttQos.QOS0);
-                            Log.i("CheckPublish", "Publish: success");
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(),"Sucess !",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        } catch (Exception e) {
-                            Log.e("checkPublish", "Publish error: ", e);
-                        }
-                    }
-                }).start();
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            iotConnect.mqttManager.publishString(message, TOPIC, AWSIotMqttQos.QOS0);
+//                            Log.i("CheckPublish", "Publish: success");
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    Toast.makeText(FanActivity.this,"Sucess !",Toast.LENGTH_LONG).show();
+//                                }
+//                            });
+//                        } catch (Exception e) {
+//                            Log.e("checkPublish", "Publish error: ", e);
+//                        }
+//                    }
+//                }).start();
             }
         });
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -168,23 +163,23 @@ public class GazActivity extends AppCompatActivity {
                                         "     }\n" +
                                         "  }\n" +
                                         "}";
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            iotConnect.mqttManager.publishString(message, TOPIC, AWSIotMqttQos.QOS0);
-                                            Log.i("CheckPublish", "Publish: success");
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toast.makeText(getApplicationContext(),"Turn ON !",Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-                                        } catch (Exception e) {
-                                            Log.e("checkPublish", "Publish error: ", e);
-                                        }
-                                    }
-                                }).start();
+//                                new Thread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        try {
+//                                            iotConnect.mqttManager.publishString(message, TOPIC, AWSIotMqttQos.QOS0);
+//                                            Log.i("CheckPublish", "Publish: success");
+//                                            runOnUiThread(new Runnable() {
+//                                                @Override
+//                                                public void run() {
+//                                                    Toast.makeText(FanActivity.this,"Turn ON !",Toast.LENGTH_LONG).show();
+//                                                }
+//                                            });
+//                                        } catch (Exception e) {
+//                                            Log.e("checkPublish", "Publish error: ", e);
+//                                        }
+//                                    }
+//                                }).start();
                                 OffGas();
                                 btn_timer.setVisibility(View.VISIBLE);
                                 progressBarTimer.setVisibility(View.INVISIBLE);
@@ -227,23 +222,23 @@ public class GazActivity extends AppCompatActivity {
                                         "     }\n" +
                                         "  }\n" +
                                         "}";
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            iotConnect.mqttManager.publishString(message, TOPIC, AWSIotMqttQos.QOS0);
-                                            Log.i("CheckPublish", "Publish: success");
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toast.makeText(getApplicationContext(), "Turn OFF !", Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-                                        } catch (Exception e) {
-                                            Log.e("checkPublish", "Publish error: ", e);
-                                        }
-                                    }
-                                }).start();
+//                                new Thread(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        try {
+//                                            iotConnect.mqttManager.publishString(message, TOPIC, AWSIotMqttQos.QOS0);
+//                                            Log.i("CheckPublish", "Publish: success");
+//                                            runOnUiThread(new Runnable() {
+//                                                @Override
+//                                                public void run() {
+//                                                    Toast.makeText(FanActivity.this, "Turn OFF !", Toast.LENGTH_LONG).show();
+//                                                }
+//                                            });
+//                                        } catch (Exception e) {
+//                                            Log.e("checkPublish", "Publish error: ", e);
+//                                        }
+//                                    }
+//                                }).start();
                                 OffGas();
                                 btn_timer.setVisibility(View.VISIBLE);
                                 progressBarTimer.setVisibility(View.INVISIBLE);
