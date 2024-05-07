@@ -76,9 +76,10 @@ dependencies {
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
-
-
-
+    //connect aws
+    implementation ("com.amazonaws:aws-android-sdk-pinpoint:2.73.0")
+    implementation ("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
+    implementation ("com.amazonaws:aws-android-sdk-iot:2.8.+")
     // Add the dependency for the Realtime Database library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-database")

@@ -28,6 +28,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.mobileconnectors.iot.AWSIotMqttNewMessageCallback;
+import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,8 +37,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.nghiencuukhoahoc.Adapter.FragmentAdapter;
+import com.example.nghiencuukhoahoc.ConnectIot.IotConnect;
 import com.example.nghiencuukhoahoc.ConnectUser.SignInActivity;
+import com.example.nghiencuukhoahoc.Model.Convert_Rooms;
 import com.example.nghiencuukhoahoc.Model.ProcessJson;
+import com.example.nghiencuukhoahoc.Model.Reported;
 import com.example.nghiencuukhoahoc.Model.Rooms;
 import com.example.nghiencuukhoahoc.Model.User;
 import com.example.nghiencuukhoahoc.MyViewModel.RoomsViewModel;
@@ -58,12 +63,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String CHANEL_ID ="push_notification_id" ;
+    final String LOG_TAG = "checkConnect" ,
+            TOPIC_GET_SUBCRIBE = "$aws/things/esp/shadow/name/test/get/accepted",
+            TOPIC_GET_PUBLISH = "$aws/things/esp/shadow/name/test/get",
+            TOPIC_UPDATE_SUBCRIBE = "$aws/things/esp/shadow/name/test/update/accepted";
+    private static IotConnect iotConnect;
     private static final String TAG= MainActivity.class.getName();
     private TextView TvWeather, TvTemperature,
             TvHumidityAndWind;
@@ -76,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentAdapter fragmentAdapter;
     private FirebaseAuth auth;
     Dialog dialog;
-
+    private Reported reported;
     String weather,temper;
 
     RequestQueue requestQueue;
@@ -93,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         InitWidgets();
         getWeatherForcast();
         getTabLayOut();
+        iotConnect = IotConnect.getInstance(getApplicationContext());
 //        createWeatherNotification();
         roomsViewModel = new ViewModelProvider(this).get(RoomsViewModel.class);
         initEvent();
@@ -316,7 +328,93 @@ public class MainActivity extends AppCompatActivity {
                 });
         requestQueue.add(stringRequest);
     }
-
+    public void getData(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!iotConnect.isConnected()){
+                    Log.i("checkKetNoi", "chua ket noi");
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Log.i("checkKetNoi", "da ket noi");
+                try {
+                    iotConnect.mqttManager.subscribeToTopic(TOPIC_GET_SUBCRIBE,
+                            AWSIotMqttQos.QOS0 /* Quality of Service */,
+                            new AWSIotMqttNewMessageCallback() {
+                                @Override
+                                public void onMessageArrived(final String topic, final byte[] data) {
+                                    try {
+                                        String message = new String(data, "UTF-8");
+                                        Log.d("check_message_receive", "Message received: " + message);
+                                        reported = ProcessJson.convert_Json_to_object_reported(message);
+//                                        Log.d("Device", "temperature: " + reported.getBedRoom().getTemperature()
+//                                                + " and " + reported.getBedRoom().getHumidity());
+                                        List<Rooms> lst_rooms = Convert_Rooms.convertreported(reported);
+//                                        Log.d("checkRooms", lst_rooms.get(0).getTemperature() + "-");
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                roomsViewModel.setData(lst_rooms);
+//                                                dialog.show();
+//                                                vibrator.vibrate(2000);
+                                            }
+                                        });
+                                    } catch (UnsupportedEncodingException e) {
+                                        Log.e("check_message_receive", "Message encoding error: ", e);
+                                    }
+                                }
+                            });
+                } catch (Exception e) {
+                    Log.e("check_message_receive", "Subscription error: ", e);
+                }
+                try {
+                    iotConnect.mqttManager.subscribeToTopic(TOPIC_UPDATE_SUBCRIBE,
+                            AWSIotMqttQos.QOS0 /* Quality of Service */,
+                            new AWSIotMqttNewMessageCallback() {
+                                @Override
+                                public void onMessageArrived(final String topic, final byte[] data) {
+                                    try {
+                                        String message = new String(data, "UTF-8");
+                                        Log.d("check_message_receive", "Message received: " + message);
+                                        reported = ProcessJson.convert_Json_to_object_reported(message);
+//                                        Log.d("Device", "temperature: " +
+//                                                reported.getBedRoom().getTemperature()
+//                                                + " and " + reported.getBedRoom().getHumidity());
+                                        List<Rooms> lst_rooms = Convert_Rooms.convertreported(reported);
+//                                        Log.d("checkRooms", lst_rooms.get(0).getTemperature() + "-");
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                roomsViewModel.setData(lst_rooms);
+                                                for(int i =0 ; i< lst_rooms.size() ; i++){
+                                                    if(lst_rooms.get(i).getGas_state() == 0){
+                                                        dialog.show();
+                                                        vibrator.vibrate(2000);
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    } catch (UnsupportedEncodingException e) {
+                                        Log.e("check_message_receive", "Message encoding error: ", e);
+                                    }
+                                }
+                            });
+                } catch (Exception e) {
+                    Log.e("check_message_receive", "Subscription error: ", e);
+                }
+                try {
+                    Log.i("CheckPublish", "Publish: success");
+                    iotConnect.mqttManager.publishString("", TOPIC_GET_PUBLISH, AWSIotMqttQos.QOS0);
+                } catch (Exception e) {
+                    Log.e("checkPublish", "Publish error: ", e);
+                }
+            }
+        }).start();
+    }
     public static String capitalizeFirstLetter(String str) {
         if (str == null || str.isEmpty()) {
             return str;
