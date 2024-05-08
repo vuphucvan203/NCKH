@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="56dp"
-        android:text="Hehehe"
+        android:text="Smart Home"
         android:textColor="@color/white"
         android:textSize="40dp"
         android:textStyle="bold"
