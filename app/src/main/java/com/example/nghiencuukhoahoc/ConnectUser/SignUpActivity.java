@@ -100,6 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
             return email;
         }
     }
+
     public static String generateRandomPhoneNumber() {
         Random random = new Random();
         String[] prefixes = {"03", "05", "07", "08", "09"};
